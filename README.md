@@ -7,9 +7,6 @@
 
 ---
 
-<h1 align="center">🌿 Seongwon An (CastleHana)</h1>
-<h3 align="center">Creative Engineer · Game Developer · UI/UX Designer</h3>
-
 <p align="center">
   <a href="https://abundant-cadmium-37f.notion.site/Castle-Hana-Portfolio-29aa426b1eed8128aa75edd21824237c?pvs=73" target="_blank">
     <img src="https://upload.wikimedia.org/wikipedia/commons/e/e9/Notion-logo.svg" alt="Notion Logo" width="26" style="vertical-align:middle; margin-right:8px;"/>
