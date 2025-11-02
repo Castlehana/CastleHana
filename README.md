@@ -64,7 +64,7 @@ and interactions feel natural, warm, and human.
 <p align="center">
   <a href="https://github.com/Castlehana"><img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white"/></a>
   <a href="https://www.instagram.com/castle_hana/"><img src="https://img.shields.io/badge/Instagram-E4405F?style=flat-square&logo=instagram&logoColor=white"/></a>
-  <a href="mailto:tjddnjs8117@naver.com"><img src="https://img.shields.io/badge/Email-03C75A?style=flat-square&logo=gmail&logoColor=white"/></a>
+  <a href="mailto:castlehanaa@gmail.com"><img src="https://img.shields.io/badge/Email-03C75A?style=flat-square&logo=gmail&logoColor=white"/></a>
 </p>
 
 ---
