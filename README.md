@@ -48,13 +48,6 @@ and interactions feel natural, warm, and human.
 
 ---
 
-### 📈 Growth
-I’m constantly exploring and learning through small creative projects.  
-Each idea is a chance to express emotion through technology  
-and craft meaningful interactions for people.
-
----
-
 ### 📊 GitHub Overview
 <p align="center">
   <img src="https://github-readme-stats.vercel.app/api?username=Castlehana&show_icons=true&theme=calm" height="150"/>
