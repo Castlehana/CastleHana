@@ -61,6 +61,14 @@ but by the sincerity and creativity poured into each challenge.
 
 ---
 
+### 📊 GitHub Overview
+<p align="center">
+  <img src="https://github-readme-stats.vercel.app/api?username=Castlehana&show_icons=true&theme=calm" height="150"/>
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Castlehana&layout=compact&theme=calm" height="150"/>
+</p>
+
+---
+
 ### 🌿 Connect
 <p align="center">
   <a href="https://github.com/Castlehana"><img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white"/></a>
