@@ -34,7 +34,7 @@ and interactions feel natural, warm, and human.
 | 🎓 Education | Multimedia Software Engineering, Dongguk University |
 | 💼 Role | Planner · Developer · Designer |
 | 💡 Interests | AI Interaction · Game Design · UX Psychology |
-| 📫 Contact | **tjddnjs8117@naver.com** · [GitHub @Castlehana](https://github.com/Castlehana) |
+| 📫 Contact | **castlehanaa@gmail.com** · [GitHub @Castlehana](https://github.com/Castlehana) |
 
 ---
 
