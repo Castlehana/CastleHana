@@ -38,8 +38,8 @@ I major in **Multimedia Software Engineering** at **Dongguk University**, and I 
 
 ### 📊 GitHub Stats
 <p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=yourusername&show_icons=true&theme=default" height="150"/>
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=yourusername&layout=compact&theme=default" height="150"/>
+  <img src="https://github-readme-stats.vercel.app/api?username=CastleHana&show_icons=true&theme=default" height="150"/>
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=CastleHana&layout=compact&theme=default" height="150"/>
 </p>
 
 ---
