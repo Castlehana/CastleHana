@@ -5,11 +5,6 @@
 
 ---
 
-<h1 align="center">🌿 Hi, I'm <b>Seongwon An</b></h1>
-<h3 align="center">Creative Engineer · Game Developer · UI/UX Designer</h3>
-
----
-
 ### 💬 About Me
 > “Technology is the most delicate tool for delivering emotions.”
 
