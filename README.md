@@ -71,7 +71,8 @@ and interactions feel natural, warm, and human.
 ---
 
 <img 
-  src="https://capsule-render.vercel.app/api?type=waving&color=0:A8E6CF,100:56CFE1&height=150&reversal=true"
+  src="https://capsule-render.vercel.app/api?type=waving&color=0:A8E6CF,100:56CFE1&height=150&section=footer"
   alt="footer"
   style="pointer-events:none; user-select:none;" />
+
 
