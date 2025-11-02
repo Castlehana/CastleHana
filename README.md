@@ -69,3 +69,9 @@ and interactions feel natural, warm, and human.
 </p>
 
 ---
+
+<img 
+  src="https://capsule-render.vercel.app/api?type=waving&color=0:A8E6CF,100:56CFE1&height=150&reversal=true"
+  alt="footer"
+  style="pointer-events:none; user-select:none;" />
+
