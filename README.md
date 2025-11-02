@@ -2,8 +2,12 @@
 
 <!-- 🎨 Capsule Render Header -->
 <p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:A8E6CF,100:56CFE1&height=230&section=header&text=Hi%2C%20I'm%20CastleHana%20🌿&fontSize=45&fontAlignY=35&desc=Designing%20Technology%20that%20Feels&descAlignY=60&descAlign=50&fontColor=ffffff" alt="header"/>
+  <img 
+    src="https://capsule-render.vercel.app/api?type=waving&color=0:A8E6CF,100:56CFE1&height=230&section=header&text=Hi%2C%20I'm%20CastleHana%20🌿&fontSize=45&fontAlignY=35&desc=Designing%20Technology%20that%20Feels&descAlignY=60&descAlign=50&fontColor=ffffff" 
+    alt="header" 
+    style="pointer-events: none; user-select: none;" />
 </p>
+
 
 ---
 
