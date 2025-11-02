@@ -8,15 +8,14 @@
 ### 💬 About Me
 > “Technology is the most delicate tool for delivering emotions.”
 
-I see technology not just as a means of efficiency,  
-but as a **language for designing emotions and crafting experiences**.  
-Whenever I create, I start by asking,  
-“**What should the user feel?**” rather than “What should I build?”.  
+I see technology not as a tool of efficiency,  
+but as a **language that conveys emotion and creates experiences**.  
+When designing, I ask not *“What should I build?”* but *“What should the user feel?”*  
 
-Through light, motion, interaction, and sound,  
+Through light, motion, sound, and interaction,  
 I design experiences where emotion flows naturally through technology.  
-My goal is to create **warm, human-centered interactions**  
-where people and technology connect effortlessly.
+My goal is to create **warm, human-centered moments**  
+where people and technology connect seamlessly.
 
 ---
 
@@ -47,18 +46,18 @@ where people and technology connect effortlessly.
 ---
 
 ### 🌱 Philosophy
-I believe **technology can express empathy**  
+I believe **technology can express empathy**,  
 and **design can speak without words**.  
 My work lies at the intersection of logic and emotion —  
 where structured systems evoke human feelings.
 
 ---
 
-### 📊 GitHub Stats
-<p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=Castlehana&show_icons=true&theme=default" height="150"/>
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Castlehana&layout=compact&theme=default" height="150"/>
-</p>
+### 📈 Growth
+I'm continuously learning, experimenting, and improving every day.  
+Even small projects and ideas are opportunities to explore new perspectives.  
+I believe that **growth isn’t measured by numbers**,  
+but by the sincerity and creativity poured into each challenge.
 
 ---
 
