@@ -1,5 +1,10 @@
 <!-- Inspired by rzashakeri/beautify-github-profile -->
 
+<!-- 🎨 Capsule Render Header -->
+![header](https://capsule-render.vercel.app/api?type=waving&color=0:8EC5FC,100:E0C3FC&height=230&section=header&text=Hi%2C%20I'm%20CastleHana%20🌿&fontSize=45&fontAlignY=35&desc=Designing%20Technology%20that%20Feels&descAlignY=60&descAlign=50&fontColor=ffffff)
+
+---
+
 <h1 align="center">🌿 Hi, I'm <b>Seongwon An</b></h1>
 <h3 align="center">Creative Engineer · Game Developer · UI/UX Designer</h3>
 
