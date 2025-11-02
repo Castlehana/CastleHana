@@ -71,5 +71,3 @@ and craft meaningful interactions for people.
 </p>
 
 ---
-
-<p align="center">✨ Inspired by <a href="https://github.com/rzashakeri/beautify-github-profile">Beautify GitHub Profile</a> ✨</p>
