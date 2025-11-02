@@ -77,5 +77,3 @@ but by the sincerity and creativity poured into each challenge.
 </p>
 
 ---
-
-<p align="center">✨ Inspired by <a href="https://github.com/rzashakeri/beautify-github-profile">Beautify GitHub Profile</a> ✨</p>
