@@ -1,22 +1,28 @@
 <!-- Inspired by rzashakeri/beautify-github-profile -->
 
 <!-- 🎨 Capsule Render Header -->
-![header](https://capsule-render.vercel.app/api?type=waving&color=0:A8E6CF,100:56CFE1&height=230&section=header&text=Hi%2C%20I'm%20CastleHana%20🌿&fontSize=45&fontAlignY=35&desc=Designing%20Technology%20that%20Feels&descAlignY=60&descAlign=50&fontColor=ffffff)
+<p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:A8E6CF,100:56CFE1&height=230&section=header&text=Hi%2C%20I'm%20CastleHana%20🌿&fontSize=45&fontAlignY=35&desc=Designing%20Technology%20that%20Feels&descAlignY=60&descAlign=50&fontColor=ffffff" alt="header"/>
+</p>
 
+---
+
+<h1 align="center">🌿 Seongwon An (CastleHana)</h1>
+<h3 align="center">Creative Engineer · Game Developer · UI/UX Designer</h3>
+
+<p align="center">
+  <a href="https://abundant-cadmium-37f.notion.site/Castle-Hana-Portfolio-29aa426b1eed8128aa75edd21824237c?pvs=73" target="_blank">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/e/e9/Notion-logo.svg" alt="Notion Logo" width="26" style="vertical-align:middle; margin-right:8px;"/>
+    <b>View My Notion Portfolio</b>
+  </a>
+</p>
 
 ---
 
 ### 💬 About Me
-> “Technology is the most delicate tool for delivering emotions.”
-
-I see technology not as a tool of efficiency,  
-but as a **language that conveys emotion and creates experiences**.  
-When designing, I ask not *“What should I build?”* but *“What should the user feel?”*  
-
-Through light, motion, sound, and interaction,  
-I design experiences where emotion flows naturally through technology.  
-My goal is to create **warm, human-centered moments**  
-where people and technology connect seamlessly.
+I’m a **creative engineer** who blends technology with emotional design.  
+My work focuses on creating experiences where **logic meets empathy**,  
+and interactions feel natural, warm, and human.
 
 ---
 
@@ -25,9 +31,8 @@ where people and technology connect seamlessly.
 | Category | Details |
 |-----------|----------|
 | 🎓 Education | Multimedia Software Engineering, Dongguk University |
-| 💼 Role | Planner · Developer · Designer (Hybrid Engineer) |
-| 💡 Interests | AI Interaction · Game Design · Computer Vision · UX Psychology |
-| 🧠 Strength | Emotional Design & System Thinking |
+| 💼 Role | Planner · Developer · Designer |
+| 💡 Interests | AI Interaction · Game Design · UX Psychology |
 | 📫 Contact | **tjddnjs8117@naver.com** · [GitHub @Castlehana](https://github.com/Castlehana) |
 
 ---
@@ -46,19 +51,10 @@ where people and technology connect seamlessly.
 
 ---
 
-### 🌱 Philosophy
-I believe **technology can express empathy**,  
-and **design can speak without words**.  
-My work lies at the intersection of logic and emotion —  
-where structured systems evoke human feelings.
-
----
-
 ### 📈 Growth
-I'm continuously learning, experimenting, and improving every day.  
-Even small projects and ideas are opportunities to explore new perspectives.  
-I believe that **growth isn’t measured by numbers**,  
-but by the sincerity and creativity poured into each challenge.
+I’m constantly exploring and learning through small creative projects.  
+Each idea is a chance to express emotion through technology  
+and craft meaningful interactions for people.
 
 ---
 
@@ -78,3 +74,5 @@ but by the sincerity and creativity poured into each challenge.
 </p>
 
 ---
+
+<p align="center">✨ Inspired by <a href="https://github.com/rzashakeri/beautify-github-profile">Beautify GitHub Profile</a> ✨</p>
