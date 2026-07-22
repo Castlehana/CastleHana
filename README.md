@@ -8,8 +8,6 @@
     style="pointer-events:none; user-select:none;" />
 </p>
 
-
-
 ---
 
 <p align="center">
@@ -22,9 +20,11 @@
 ---
 
 ### 💬 About Me
-I’m a **creative engineer** who blends technology with emotional design.  
-My work focuses on creating experiences where **logic meets empathy**,  
-and interactions feel natural, warm, and human.
+I’m a **researcher and creative engineer** working at the intersection of
+**computer vision, graphics, and human–computer interaction** —
+interested in how people **see, move, and feel** inside the spaces we build.  
+I care less about what a system can compute, and more about
+what it lets someone **experience** — where **logic meets empathy**.
 
 ---
 
@@ -32,24 +32,29 @@ and interactions feel natural, warm, and human.
 
 | Category | Details |
 |-----------|----------|
-| 🎓 Education | Multimedia Software Engineering, Dongguk University |
-| 💼 Role | Planner · Developer · Designer |
-| 💡 Interests | AI Interaction · Game Design · UX Psychology |
+| 🎓 Education | M.S. Student, **Korea University** — DXP Lab (HCI · VR/XR) · B.S., **Dongguk University** |
+| 💼 Role | R&D Researcher, CV Team · SFACSPACE Co., Ltd. |
+| 🔬 Research | Computer Vision & Graphics · XR · Human–Computer Interaction |
+| 💡 Interests | UX / Interactive Content · Game & Media Art |
 | 📫 Contact | **castlehanaa@gmail.com** · [GitHub @Castlehana](https://github.com/Castlehana) |
+
+---
+
+### 🚀 What I’m Working On
+- 🌀 **Real-time 3D/4D Gaussian Splatting** — web-based editor & shader-based relighting
+- 🛰️ **LiDAR–360° camera fusion** pipelines for 3D reconstruction / SLAM
+- 🎮 **Interactive & game experiences** — motion recognition, immersive interaction
+- 🧪 Heading into graduate research on **HCI · XR** at Korea University’s DXP Lab
 
 ---
 
 ### ⚙️ Skills & Tools
 
-#### 💻 Programming
-<p align="center">
-  <img src="https://skillicons.dev/icons?i=cs,cpp,java,py,html,css,js,arduino&theme=light"/>
-</p>
-
-#### 🎮 Development / Design
-<p align="center">
-  <img src="https://skillicons.dev/icons?i=unity,unreal,flutter,git,github,vscode,notion,figma,illustrator,premiere,aftereffects&theme=light"/>
-</p>
+| | |
+|---|---|
+| 💻 **Programming** | Python · JavaScript / TypeScript · C++ · SQL |
+| 🧠 **AI / CV & Graphics** | PyTorch · MediaPipe · NeRF · 3D/4D Gaussian Splatting · WebGL · Shaders |
+| 🎮 **Engines & Tools** | Unity · Unreal Engine · Figma · Git · Notion |
 
 ---
 
@@ -58,8 +63,6 @@ and interactions feel natural, warm, and human.
   <img src="https://github-readme-stats.vercel.app/api?username=Castlehana&show_icons=true&title_color=56CFE1&text_color=E0E0E0&icon_color=56CFE1&bg_color=0D1117&hide_border=true" height="150"/>
   <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Castlehana&layout=compact&title_color=56CFE1&text_color=E0E0E0&bg_color=0D1117&hide_border=true" height="150"/>
 </p>
-
-
 
 ---
 
@@ -76,5 +79,3 @@ and interactions feel natural, warm, and human.
   src="https://capsule-render.vercel.app/api?type=waving&color=0:A8E6CF,100:56CFE1&height=150&section=footer"
   alt="footer"
   style="pointer-events:none; user-select:none;" />
-
-
