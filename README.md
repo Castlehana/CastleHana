@@ -3,7 +3,7 @@
 <!-- 🎨 Capsule Render Header -->
 <p align="center">
   <img 
-    src="https://capsule-render.vercel.app/api?type=waving&color=0:A8E6CF,100:56CFE1&height=230&section=header&text=Hi%2C%20I'm%20CastleHana%20🌿&fontSize=45&fontAlign=80&fontAlignY=35&desc=Designing%20Technology%20that%20Feels&descAlign=80&descAlignY=60&fontColor=ffffff" 
+    src="https://capsule-render.vercel.app/api?type=waving&color=0:A8E6CF,100:56CFE1&height=230&section=header&text=Hi%2C%20I'm%20Castle%20Hana&fontSize=38&fontAlign=73&fontAlignY=38&desc=Perception%2C%20Space%2C%20and%20Presence&descAlign=73&descAlignY=60&fontColor=ffffff" 
     alt="header"
     style="pointer-events:none; user-select:none;" />
 </p>
