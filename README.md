@@ -59,8 +59,8 @@ what it lets someone **experience** — where **logic meets empathy**.
 
 ### 📊 GitHub Overview
 <p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=Castlehana&show_icons=true&title_color=56CFE1&text_color=E0E0E0&icon_color=56CFE1&bg_color=0D1117&hide_border=true" height="150"/>
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Castlehana&layout=compact&title_color=56CFE1&text_color=E0E0E0&bg_color=0D1117&hide_border=true" height="150"/>
+  <img src="https://github-readme-stats-castlehanas-projects.vercel.app/api?username=Castlehana&show_icons=true&title_color=56CFE1&text_color=E0E0E0&icon_color=56CFE1&bg_color=0D1117&hide_border=true" height="150" alt="GitHub stats"/>
+  <img src="https://github-readme-stats-castlehanas-projects.vercel.app/api/top-langs/?username=Castlehana&layout=compact&title_color=56CFE1&text_color=E0E0E0&bg_color=0D1117&hide_border=true" height="150" alt="Top languages"/>
 </p>
 
 ---
