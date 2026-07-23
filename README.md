@@ -3,7 +3,7 @@
 <!-- 🎨 Capsule Render Header -->
 <p align="center">
   <img 
-    src="https://capsule-render.vercel.app/api?type=waving&color=0:A8E6CF,100:56CFE1&height=230&section=header&text=Hi%2C%20I'm%20Castle%20Hana&fontSize=38&fontAlign=73&fontAlignY=38&desc=Perception%2C%20Space%2C%20and%20Presence&descAlign=73&descAlignY=60&fontColor=ffffff" 
+    src="https://capsule-render.vercel.app/api?type=waving&color=0:A8E6CF,100:56CFE1&height=230&section=header&text=Hi%2C%20I'm%20Castle%20Hana&fontSize=38&fontAlign=68.8&fontAlignY=38&desc=Perception%2C%20Space%2C%20and%20Presence&descAlign=70.8&descAlignY=60&fontColor=ffffff" 
     alt="header"
     style="pointer-events:none; user-select:none;" />
 </p>
@@ -32,7 +32,6 @@ what it lets someone **experience** — where **logic meets empathy**.
 | Category | Details |
 |-----------|----------|
 | 🎓 Education | M.S. Student, **Korea University** — DXP Lab (HCI · VR/XR) · B.S., **Dongguk University** |
-| 💼 Role | R&D Researcher, CV Team · SFACSPACE Co., Ltd. |
 | 🔬 Research | Computer Vision & Graphics · XR · Human–Computer Interaction |
 | 💡 Interests | UX / Interactive Content · Game & Media Art |
 | 📫 Contact | **castlehanaa@gmail.com** · [GitHub @Castlehana](https://github.com/Castlehana) |
