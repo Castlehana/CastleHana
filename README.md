@@ -11,9 +11,8 @@
 ---
 
 <p align="center">
-  <a href="https://abundant-cadmium-37f.notion.site/Castle-Hana-Portfolio-29aa426b1eed8128aa75edd21824237c?pvs=73" target="_blank">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/e/e9/Notion-logo.svg" alt="Notion Logo" width="26" style="vertical-align:middle; margin-right:8px;"/>
-    <b>View My Notion Portfolio</b>
+  <a href="https://castlehana.github.io/CastleHana/" target="_blank">
+    <b>🌿 View My Portfolio Site</b>
   </a>
 </p>
 
