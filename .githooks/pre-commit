@@ -1,0 +1,5 @@
+#!/bin/sh
+# img/ 를 훑어 manifest.js 를 다시 만들고, 바뀌었으면 이번 커밋에 포함한다.
+# 이미지를 넣고 커밋만 하면 상세 창에 반영된다.
+python3 tools/scan-images.py >/dev/null || exit 1
+git add img/manifest.js

@@ -7,14 +7,14 @@
 <meta name="description" content="SeongWon Ahn — M.S. student at Korea University. Computer vision, graphics, XR, and human–computer interaction.">
 <style>
   :root {
-    --bg:        #FBF8F2;   /* ivory */
-    --bg-alt:    #F5F0E5;
-    --paper:     #FFFDF9;
-    --line:      #E4DCCB;
-    --line-soft: #EFE8D9;
-    --ink:       #3A3630;
-    --heading:   #2B2721;
-    --muted:     #8C8474;
+    --bg:        #FAFDFC;   /* near-white mint */
+    --bg-alt:    #F1F9F6;
+    --paper:     #FFFFFF;
+    --line:      #DFEBE7;
+    --line-soft: #EDF5F2;
+    --ink:       #2F3B36;
+    --heading:   #1E2B26;
+    --muted:     #77897F;
     --accent:    #3FCBA8;   /* bright mint — decorative */
     --accent-dk: #17876F;   /* deeper mint — text/links */
     --accent-lt: rgba(63,203,168,.16);
@@ -66,7 +66,29 @@
   header.major p { margin-top: 1.2em; color: var(--muted); }
 
   /* ══ intro banner ══ */
-  #intro { padding-bottom: 3em; border-bottom: 1px solid var(--line); margin-bottom: 3.4em; }
+  #intro {
+    padding-bottom: 0; border-bottom: 1px solid var(--line); margin-bottom: 3.4em;
+    display: block;   /* 프로필 사진 복구 시: grid / 1fr auto / gap 3em / align-items end */
+  }
+  #intro .col { padding-bottom: 3em; }
+  .frame { position: relative; display: block; margin: 0 .7em 3.5em 0; }
+  .frame::before {                      /* offset accent outline */
+    content: ''; position: absolute; inset: .7em -.7em -.7em .7em;
+    border: 1px solid var(--accent); border-radius: 6px;
+  }
+  .frame img {
+    position: relative; display: block; width: 9.5em; height: auto;
+    border-radius: 6px; padding-top: .4em;
+    background: linear-gradient(170deg, rgba(63,203,168,.28), rgba(63,203,168,.08) 70%, var(--paper));
+    box-shadow: 0 10px 24px -14px rgba(30,60,50,.35);
+  }
+  @media (max-width: 900px) { .frame img { width: 8em; } }
+  @media (max-width: 620px) {
+    #intro { grid-template-columns: 1fr; gap: 0; }
+    .frame { margin: 0 0 2.8em; width: max-content; }
+    .frame img { width: 7em; }
+    #intro .col { padding-bottom: 1.4em; }
+  }
   #intro h1 { margin-bottom: .5em; }
   #intro p { font-family: var(--serif); font-size: 1.28em; line-height: 1.6; color: #5A5344; max-width: 40em; margin-bottom: 0; }
 
@@ -95,14 +117,14 @@
   .posts article:hover h3 { color: var(--accent-dk); }
   .posts article:focus-visible { outline: 2px solid var(--accent); outline-offset: 8px; border-radius: 4px; }
   .posts article .image { transition: box-shadow .22s; }
-  .posts article:hover .image { box-shadow: 0 12px 26px -14px rgba(60,50,30,.5); }
+  .posts article:hover .image { box-shadow: 0 12px 26px -14px rgba(30,60,50,.4); }
   .posts .image {
     display: block; border-radius: 4px; overflow: hidden;
-    height: 150px; margin-bottom: 1.8em; position: relative;
+    aspect-ratio: 16 / 9; margin-bottom: 1.8em; position: relative;
   }
   .posts h3 { margin-bottom: .8em; }
   .posts .role { font-size: .8em; color: var(--muted); letter-spacing: .04em; margin: -.4em 0 1em; }
-  .posts p { font-size: .95em; margin-bottom: 1.4em; }
+  .posts p { font-size: .95em; margin-bottom: 1.4em; text-align: justify; hyphens: auto; }
   .posts .tags, dialog.gm .tags { list-style: none; padding: 0; margin: auto 0 0; display: flex; flex-wrap: wrap; gap: .5em; }
   .posts .tags li, dialog.gm .tags li {
     font-size: .68em; letter-spacing: .12em; text-transform: uppercase; font-weight: 700;
@@ -159,7 +181,7 @@
     .gallery .track { animation: none; }
   }
   .shot {
-    flex: 0 0 auto; width: 17em; height: 10.4em; border-radius: 5px;
+    flex: 0 0 auto; width: 17em; aspect-ratio: 16 / 9; border-radius: 5px;
     position: relative; overflow: hidden; cursor: pointer; border: 0; padding: 0;
     transition: transform .22s, box-shadow .22s;
   }
@@ -167,7 +189,7 @@
     content: ''; position: absolute; inset: 0;
     background: linear-gradient(to top, rgba(0,0,0,.55), transparent 55%);
   }
-  .shot:hover { transform: translateY(-3px); box-shadow: 0 12px 26px -14px rgba(60,50,30,.5); }
+  .shot:hover { transform: translateY(-3px); box-shadow: 0 12px 26px -14px rgba(30,60,50,.4); }
   .shot .cap {
     position: absolute; left: 1em; right: 1em; bottom: .85em; z-index: 1; text-align: left;
     font-family: var(--serif); font-size: 1.02em; font-weight: 600; color: #fff;
@@ -185,8 +207,10 @@
   .g6 { background: repeating-linear-gradient(115deg, rgba(255,255,255,.13) 0 3px, transparent 3px 14px), linear-gradient(145deg, #4FB6D9, #2A6E96 65%, #16374C); }
 
   dialog.gm {
-    border: 1px solid var(--line); border-radius: 8px; padding: 0;
-    max-width: 30em; width: calc(100% - 3em); background: var(--paper); color: var(--ink);
+    border: 0; border-radius: 12px; padding: 0; overflow: hidden;
+    max-height: 88vh;   /* position은 건드리지 말 것 — 브라우저의 모달 배치를 깨뜨림 */
+    max-width: 48em; width: calc(100% - 3em); background: var(--paper); color: var(--ink);
+    box-shadow: 0 32px 70px -30px rgba(20,50,42,.55), 0 0 0 1px var(--line);
     opacity: 0; transform: translateY(14px) scale(.97);
     transition: opacity .26s ease, transform .26s cubic-bezier(.2,.8,.3,1),
                 overlay .26s allow-discrete, display .26s allow-discrete;
@@ -195,25 +219,109 @@
   @starting-style { dialog.gm[open] { opacity: 0; transform: translateY(14px) scale(.97); } }
 
   dialog.gm::backdrop {
-    background: rgba(40,34,24,.42); backdrop-filter: blur(2px);
+    background: rgba(18,42,36,.5); backdrop-filter: blur(3px);
     opacity: 0; transition: opacity .26s ease, overlay .26s allow-discrete, display .26s allow-discrete;
   }
   dialog.gm[open]::backdrop { opacity: 1; }
   @starting-style { dialog.gm[open]::backdrop { opacity: 0; } }
-
   @media (prefers-reduced-motion: reduce) {
     dialog.gm, dialog.gm::backdrop { transition: none; }
   }
-  dialog.gm .hero { height: 8.5em; }
-  dialog.gm .in { padding: 1.8em 2em 2em; }
-  dialog.gm h3 { margin: 0 0 .2em; }
-  dialog.gm .sub { font-size: .82em; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-bottom: 1.2em; }
-  dialog.gm p { font-size: .95em; margin: 0 0 1.4em; }
-  dialog.gm .tags { margin: 0 0 1.6em; }
-  dialog.gm .x {
-    background: none; border: 0; cursor: pointer; font-size: .72em; font-weight: 700;
-    letter-spacing: .2em; text-transform: uppercase; color: var(--accent-dk); padding: 0;
+
+  /* hero with title overlaid */
+  dialog.gm .hero { aspect-ratio: 16 / 9; position: relative; }
+  dialog.gm .hero::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(8,26,22,.88) 0%, rgba(8,26,22,.35) 38%, transparent 70%);
   }
+  dialog.gm .cap {
+    position: absolute; left: 0; right: 0; bottom: 0; z-index: 1;
+    padding: 0 2.6em 1.8em;
+  }
+  dialog.gm .cap .sub {
+    font-size: .72em; letter-spacing: .18em; text-transform: uppercase;
+    color: var(--accent); font-weight: 700; margin-bottom: .6em;
+  }
+  dialog.gm .cap h3 {
+    font-family: var(--serif); font-size: 1.7em; line-height: 1.2;
+    color: #fff; margin: 0; text-shadow: 0 2px 10px rgba(0,0,0,.4);
+  }
+  dialog.gm .x {
+    position: absolute; top: 1em; right: 1em; z-index: 3;
+    width: 2.2em; height: 2.2em; border-radius: 50%; border: 0; padding: 0;
+    background: rgba(255,255,255,.14); backdrop-filter: blur(6px);
+    color: #fff; font-size: 1em; line-height: 1; cursor: pointer;
+    transition: background .18s, transform .18s;
+  }
+  dialog.gm .x:hover { background: rgba(255,255,255,.3); transform: rotate(90deg); }
+
+  dialog.gm .in { padding: 1.8em 2.6em 2.6em; }
+
+  /* scroll area */
+  dialog.gm .sheet {
+    max-height: 88vh; overflow-y: auto; overscroll-behavior: contain;
+    scrollbar-width: thin; scrollbar-color: var(--accent) transparent;
+  }
+  dialog.gm .sheet::-webkit-scrollbar { width: 10px; }
+  dialog.gm .sheet::-webkit-scrollbar-track { background: transparent; }
+  dialog.gm .sheet::-webkit-scrollbar-thumb {
+    background: var(--accent); border-radius: 99px;
+    border: 3px solid var(--paper);      /* inset look */
+  }
+  dialog.gm .sheet::-webkit-scrollbar-thumb:hover { background: var(--accent-dk); }
+
+  /* bottom fade — hints there is more below */
+  dialog.gm .fade {
+    position: absolute; left: 0; right: 0; bottom: 0; height: 3.2em;
+    background: linear-gradient(to top, var(--paper) 12%, transparent);
+    pointer-events: none; opacity: 0; transition: opacity .2s;
+  }
+  dialog.gm.more .fade { opacity: 1; }
+  dialog.gm p {
+    font-size: 1em; line-height: 1.75; margin: 0 0 1.6em; max-width: 66ch;
+    color: var(--ink); white-space: pre-line;   /* \n\n → 문단 나눔 */
+    text-align: justify; hyphens: auto;         /* 양끝 맞춤 + 자동 하이픈 */
+  }
+  dialog.gm .tags { margin: 0; }
+  dialog.gm .go { display: inline-block; margin: 0 0 1.6em; }
+  dialog.gm .go:empty { display: none; }
+
+  dialog.gm .strip {
+    display: flex; gap: .6em; overflow-x: auto;
+    padding: 1.2em 2.6em; scrollbar-width: thin;
+    background: var(--bg-alt); border-bottom: 1px solid var(--line-soft);
+  }
+  dialog.gm .strip img {
+    height: 5.4em; aspect-ratio: 16 / 9; object-fit: cover;
+    border-radius: 5px; cursor: pointer; flex: 0 0 auto;
+    box-shadow: 0 0 0 1px var(--line);
+    opacity: .62; transition: opacity .18s, box-shadow .18s, transform .18s;
+  }
+  dialog.gm .strip img:hover { opacity: 1; transform: translateY(-2px); }
+  dialog.gm .strip img.on { opacity: 1; box-shadow: 0 0 0 2px var(--accent); }
+  dialog.gm .strip img[data-i="0"].is-video { position: relative; }
+  dialog.gm .strip:empty { display: none; }
+
+  /* covers */
+  .photo { background-size: cover; background-position: center; }
+  video.image, .hero video {
+    display: block; width: 100%; height: 100%; object-fit: cover; background: #0A0A0A;
+  }
+  .hero video { position: absolute; inset: 0; }
+  .hero .spin {
+    position: absolute; inset: 0; z-index: 2; display: grid; place-items: center;
+    background: rgba(10,26,22,.45); backdrop-filter: blur(2px);
+    transition: opacity .3s; 
+  }
+  .hero .spin::after {
+    content: ''; width: 2.4em; height: 2.4em; border-radius: 50%;
+    border: 3px solid rgba(255,255,255,.25); border-top-color: var(--accent);
+    animation: spin .8s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .hero:not(.loading) .spin { opacity: 0; pointer-events: none; }
+  @media (prefers-reduced-motion: reduce) { .hero .spin::after { animation-duration: 2.4s; } }
+
   @media (max-width: 1280px) { .gallery { margin: 0 -3em; } }
   @media (max-width: 640px)  { .gallery { margin: 0 -1.6em; } }
 
@@ -237,6 +345,11 @@
   .rows { border-top: 1px solid var(--line-soft); margin-bottom: 2em; }
   .rows .r { display: grid; grid-template-columns: 13em 1fr; gap: 2em; padding: 1.3em 0; border-bottom: 1px solid var(--line-soft); }
   .rows .r .k { font-size: .72em; letter-spacing: .2em; text-transform: uppercase; font-weight: 700; color: var(--muted); padding-top: .5em; }
+  /* 날짜 열만 명조체 — Skills의 분류 라벨은 대문자 그대로 */
+  #education .rows .r .k, #experience .rows .r .k {
+    font-family: var(--serif); font-size: .95em; font-weight: 500;
+    letter-spacing: 0; text-transform: none; padding-top: .35em;
+  }
   .rows .r .v { font-size: .96em; }
   .rows .r .v ul { margin: .5em 0 0; padding-left: 1.1em; color: var(--muted); font-size: .95em; }
   .rows .r .v ul li { margin-bottom: .3em; }
@@ -305,6 +418,7 @@
   <div id="main">
 
     <section id="intro">
+      <div class="col">
       <h1>SeongWon Ahn</h1>
       <p>
         M.S. student in Computer Science and Engineering at Korea University,
@@ -316,6 +430,10 @@
         <li><a href="https://github.com/Castlehana" target="_blank" rel="noopener" class="button">GitHub</a></li>
         <li><a href="mailto:castlehanaa@gmail.com" class="button">Email</a></li>
       </ul>
+      </div>
+      <!-- <span class="frame">
+        <img src="img/profile.png" width="616" height="820" alt="Portrait of SeongWon Ahn">
+      </span> -->
     </section>
 
 
@@ -384,8 +502,8 @@
       <header class="major"><h2>Skills</h2></header>
       <div class="rows">
         <div class="r">
-          <div class="k">Programming</div>
-          <div class="v"><ul class="pills" style="padding:0"><li>Python</li><li>JavaScript / TypeScript</li><li>C++</li><li>SQL</li></ul></div>
+          <div class="k">Languages</div>
+          <div class="v"><ul class="pills" style="padding:0"><li>Python</li><li>C#</li><li>JavaScript / TypeScript</li><li>C++</li><li>SQL</li></ul></div>
         </div>
         <div class="r">
           <div class="k">AI / CV &amp; Graphics</div>
@@ -441,25 +559,47 @@
 </div>
 
 <dialog class="gm" id="gm">
-  <div class="hero" id="gmHero"></div>
-  <div class="in">
-    <h3 id="gmT"></h3>
-    <div class="sub" id="gmM"></div>
-    <p id="gmD"></p>
-    <ul class="tags" id="gmTags"></ul>
-    <button class="x" onclick="gm.close()">Close</button>
+  <button class="x" onclick="gm.close()" aria-label="Close">&#10005;</button>
+  <div class="sheet" id="gmSheet">
+  <div class="hero" id="gmHero">
+    <div class="spin"></div>
+    <div class="cap">
+      <div class="sub" id="gmM"></div>
+      <h3 id="gmT"></h3>
+    </div>
   </div>
+  <div class="strip" id="gmStrip"></div>
+  <div class="in">
+    <p id="gmD"></p>
+    <div class="go" id="gmGo"></div>
+    <ul class="tags" id="gmTags"></ul>
+  </div>
+  </div>
+  <div class="fade"></div>
 </dialog>
 
+<script src="img/manifest.js"></script>
 <script src="projects.js"></script>
 <script>
   const el = (html) => Object.assign(document.createElement('template'), { innerHTML: html }).content.firstElementChild;
+
+  // 폴더 스캔 결과(manifest.js) 우선, 없으면 projects.js 의 images 사용
+  const shots = (o) => ((typeof IMAGES !== 'undefined' && IMAGES[o.dir]) || o.images || [])
+    .filter(f => f !== o.poster)              // 영상 포스터는 썸네일에서 제외
+    .map(f => o.dir + f);
+  const first = (o) => shots(o)[0] || null;
+  const clip  = (o) => o.video ? o.dir + o.video : null;
+  const still = (o) => (o.poster ? o.dir + o.poster : null) || first(o);   // card stays static
+  const videoTag = (src, poster) =>
+    `<video src="${src}"${poster ? ` poster="${poster}"` : ''}
+            autoplay muted loop playsinline preload="auto"></video>`;
 
   // ── render project cards ──
   const posts = document.getElementById('posts');
   PROJECTS.forEach(p => posts.append(el(`
     <article tabindex="0">
-      <span class="image ${p.art}"></span>
+      <span class="image ${still(p) ? 'photo' : p.art}"
+            ${still(p) ? `style="background-image:url('${still(p)}')"` : ''}></span>
       <h3>${p.title}</h3>
       <div class="role">${p.role}</div>
       <p>${p.summary}</p>
@@ -469,25 +609,75 @@
   // ── render game thumbnails (twice, for a seamless loop) ──
   const track = document.getElementById('gtrack');
   const shot = (g) => el(`
-    <button class="shot ${g.cover}">
+    <button class="shot ${first(g) ? 'photo' : g.cover}"
+            ${first(g) ? `style="background-image:url('${first(g)}')"` : ''}>
       <span class="yr">${g.badge || g.year}</span>
       <span class="cap">${g.title}</span>
     </button>`);
   [...GAMES, ...GAMES].forEach(g => track.append(shot(g)));
 
   // ── popup ──
-  const open = ({ art, title, sub, desc, tags }) => {
-    gmHero.className = 'hero ' + art;
+  // 히어로에 영상 또는 이미지 하나를 올린다
+  const setHero = (item, art) => {
+    gmHero.querySelector('video')?.remove();
+    gmHero.classList.remove('loading');
+    if (item?.video) {
+      gmHero.className = 'hero';
+      gmHero.style.backgroundImage = '';
+      gmHero.classList.add('loading');
+      gmHero.insertAdjacentHTML('afterbegin', videoTag(item.video, item.thumb));
+      const v = gmHero.querySelector('video');
+      const done = () => gmHero.classList.remove('loading');
+      v.addEventListener('canplay', done, { once: true });
+      v.addEventListener('error', done, { once: true });
+    } else if (item) {
+      gmHero.className = 'hero photo';
+      gmHero.style.backgroundImage = `url('${item.src}')`;
+    } else {
+      gmHero.className = 'hero ' + art;
+      gmHero.style.backgroundImage = '';
+    }
+  };
+
+  const open = ({ art, title, sub, desc, tags, shots, video, poster, link }) => {
+    // 영상이 있으면 그것도 썸네일 하나로 취급한다 — 되돌아갈 수 있어야 하므로
+    const items = [
+      ...(video ? [{ video, thumb: poster, src: poster }] : []),
+      ...(shots || []).map(src => ({ src })),
+    ];
+    setHero(items[0], art);
+
+    gmStrip.innerHTML = items.length > 1
+      ? items.map((it, i) =>
+          `<img src="${it.src}" alt="" loading="lazy" data-i="${i}"${i ? '' : ' class="on"'}>`).join('')
+      : '';
+    gmStrip.items = items;
+    gmStrip.art = art;
+
     gmT.textContent = title;
     gmM.textContent = sub;
     gmD.textContent = desc;
     gmTags.innerHTML = (tags || []).map(t => `<li>${t}</li>`).join('');
+    gmGo.innerHTML = link
+      ? `<a class="button small" href="${link.url}" target="_blank" rel="noopener">${link.label} &#8599;</a>`
+      : '';
+    gmSheet.scrollTop = 0;
     gm.showModal();
+    requestAnimationFrame(syncFade);
   };
+
+  const syncFade = () => {
+    const more = gmSheet.scrollHeight - gmSheet.clientHeight - gmSheet.scrollTop > 12;
+    gm.classList.toggle('more', more);
+  };
+  gmSheet.addEventListener('scroll', syncFade);
+  addEventListener('resize', syncFade);
 
   const openCard = (i) => {
     const p = PROJECTS[i];
-    open({ art: p.art, title: p.title, sub: p.role, desc: p.detail, tags: p.tags });
+    open({ art: p.art, title: p.title, sub: p.role, desc: p.detail, tags: p.tags,
+           shots: shots(p),
+           video: clip(p), poster: p.poster ? p.dir + p.poster : '', link: p.link });
   };
   posts.addEventListener('click', e => {
     const a = e.target.closest('article'); if (a) openCard([...posts.children].indexOf(a));
@@ -501,7 +691,14 @@
   track.addEventListener('click', e => {
     const b = e.target.closest('.shot'); if (!b) return;
     const g = GAMES[[...track.children].indexOf(b) % GAMES.length];
-    open({ art: g.cover, title: g.title, sub: `${g.meta} · ${g.year}`, desc: g.detail });
+    open({ art: g.cover, title: g.title, sub: `${g.meta} · ${g.year}`, desc: g.detail,
+           shots: shots(g), link: g.link });
+  });
+
+  gmStrip.addEventListener('click', e => {
+    if (e.target.tagName !== 'IMG') return;
+    setHero(gmStrip.items[+e.target.dataset.i], gmStrip.art);
+    for (const img of gmStrip.children) img.classList.toggle('on', img === e.target);
   });
 
   gm.addEventListener('click', e => { if (e.target === gm) gm.close(); });   // click backdrop
