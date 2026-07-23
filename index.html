@@ -217,6 +217,15 @@
   @media (max-width: 1280px) { .gallery { margin: 0 -3em; } }
   @media (max-width: 640px)  { .gallery { margin: 0 -1.6em; } }
 
+  /* ══ scroll reveal ══ */
+  .rv { opacity: 0; transform: translateY(16px); }
+  .rv-on { transition: opacity .55s ease, transform .55s cubic-bezier(.2,.7,.3,1); }
+  .rv.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .rv { opacity: 1; transform: none; }
+    .rv-on { transition: none; }
+  }
+
   .tba {
     font-family: var(--serif); font-style: italic; font-size: 1.02em;
     color: var(--muted); background: var(--paper);
@@ -496,6 +505,23 @@
   });
 
   gm.addEventListener('click', e => { if (e.target === gm) gm.close(); });   // click backdrop
+
+  // ── reveal on scroll ──
+  const io = new IntersectionObserver((entries) => {
+    for (const e of entries) if (e.isIntersecting) {
+      e.target.classList.add('in');
+      io.unobserve(e.target);
+    }
+  }, { rootMargin: '0px 0px -12% 0px' });
+
+  document.querySelectorAll(
+    '#main section > header.major, .rows .r, .posts article, .subhead, .gallery, .tba'
+  ).forEach(el => {
+    const i = [...el.parentElement.children].indexOf(el);
+    el.style.transitionDelay = Math.min(i, 4) * 70 + 'ms';
+    el.classList.add('rv', 'rv-on');
+    io.observe(el);
+  });
 </script>
 
 </body>
