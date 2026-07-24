@@ -8,9 +8,12 @@ const IMAGES = {
   ],
   "img/projects/lidar-fusion/": [
     "01-pipeline.jpg",
+    "2-extrinsic-calib.jpg",
+    "3-extrinsic-overlay.jpg",
     "fusion-3dgs-poster.jpg"
   ],
   "img/projects/tcn-sports/": [
+    "00-architecture.jpg",
     "01-gameplay.jpg",
     "02-pose-extraction.jpg",
     "03-feature-clip.jpg",

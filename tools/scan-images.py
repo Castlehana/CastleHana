@@ -24,7 +24,7 @@ def natural(name: str):
 
 manifest = {}
 for group in ('projects', 'games'):
-    for folder in sorted((ROOT / 'img' / group).glob('*/')):
+    for folder in sorted(d for d in (ROOT / 'img' / group).iterdir() if d.is_dir()):
         files = sorted((f.name for f in folder.iterdir() if f.suffix.lower() in EXT), key=natural)
         if files:
             manifest[f'img/{group}/{folder.name}/'] = files
