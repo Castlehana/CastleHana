@@ -401,12 +401,61 @@
     #sidebar .inner { padding: 3em 3em 3.5em; max-width: 60em; margin: 0 auto; }
     #sidebar nav ul { columns: 2; }
   }
+  /* ══ 태블릿 ══ */
+  @media (max-width: 860px) {
+    #main { padding: 3em 2em 2em; }
+    #sidebar .inner { padding: 2.6em 2em 3em; }
+    .shot { width: 15em; }
+    .gallery { margin: 0 -2em; }
+    dialog.gm .in, dialog.gm .strip, dialog.gm .cap { padding-left: 2em; padding-right: 2em; }
+  }
+
+  /* ══ 모바일 ══ */
   @media (max-width: 640px) {
-    body { font-size: 14.5px; }
-    #main { padding: 2.6em 1.6em 2em; }
-    #sidebar .inner { padding: 2.4em 1.6em 3em; }
+    body { font-size: 15px; line-height: 1.7; }
+    #main { padding: 2.4em 1.4em 1.6em; }
+    #sidebar .inner { padding: 2.2em 1.4em 2.6em; }
     #sidebar nav ul { columns: 1; }
-    h1 { font-size: 1.9em; }
+
+    h1 { font-size: 2.2em; }
+    h2 { font-size: 1.4em; }
+    h3 { font-size: 1.1em; }
+
+    #intro { padding-bottom: 0; margin-bottom: 2.4em; }
+    #intro .col { padding-bottom: 2em; }
+    #intro p { font-size: 1.1em; }
+    /* 버튼은 손가락 크기로 — 한 줄에 두 개씩 */
+    ul.actions { gap: .6em; }
+    ul.actions li { flex: 1 1 8em; }
+    .button { display: block; text-align: center; padding: 0 1em; line-height: 3.6em; }
+
+    section { margin-top: 2.6em !important; }
+    header.major { margin-bottom: 1.4em; }
+    .posts { gap: 2.4em; }
+    .posts .image { margin-bottom: 1.2em; }
+
+    /* 갤러리: 자동 스크롤 대신 손으로 넘긴다 */
+    .gallery { margin: 0 -1.4em; overflow-x: auto; -webkit-overflow-scrolling: touch;
+               scroll-snap-type: x mandatory; }
+    .gallery .track { animation: none; padding: 0 1.4em; gap: .8em; }
+    .shot { width: 78vw; max-width: 20em; scroll-snap-align: center; }
+
+    /* 상세창: 화면을 채우는 시트로 */
+    dialog.gm {
+      max-height: 92vh; width: 100%; max-width: 100%;
+      margin: auto auto 0; border-radius: 14px 14px 0 0;
+    }
+    dialog.gm .sheet { max-height: 92vh; }
+    dialog.gm .in { padding: 1.4em 1.4em 2em; }
+    dialog.gm .strip { padding: .9em 1.4em; gap: .5em; }
+    dialog.gm .strip img { height: 4.2em; }
+    dialog.gm .cap { padding: 0 1.4em 1.2em; }
+    dialog.gm .cap h3 { font-size: 1.3em; }
+    dialog.gm p { font-size: .98em; text-align: left; }   /* 좁은 폭에선 양끝맞춤이 벌어진다 */
+    dialog.gm .x { width: 2.6em; height: 2.6em; top: .7em; right: .7em; }
+
+    .rows .r { padding: 1em 0; }
+    .contact-list li { padding: .9em 0; }
   }
 </style>
 </head>
@@ -614,7 +663,8 @@
       <span class="yr">${g.badge || g.year}</span>
       <span class="cap">${g.title}</span>
     </button>`);
-  [...GAMES, ...GAMES].forEach(g => track.append(shot(g)));
+  const loop = !matchMedia('(max-width: 640px)').matches;   // 모바일은 손으로 넘긴다
+  (loop ? [...GAMES, ...GAMES] : GAMES).forEach(g => track.append(shot(g)));
 
   // ── popup ──
   // 히어로에 영상 또는 이미지 하나를 올린다
