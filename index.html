@@ -21,6 +21,7 @@
     --sidebar:   26em;
     --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Times New Roman", serif;
   }
+  :root { interpolate-size: allow-keywords; }   /* height: auto 로 transition 허용 */
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
   body {
@@ -68,14 +69,10 @@
   /* ══ intro banner ══ */
   #intro {
     padding-bottom: 0; border-bottom: 1px solid var(--line); margin-bottom: 3.4em;
-    display: block;   /* 프로필 사진 복구 시: grid / 1fr auto / gap 3em / align-items end */
+    display: grid; grid-template-columns: 1fr auto; gap: 3em; align-items: end;
   }
   #intro .col { padding-bottom: 3em; }
   .frame { position: relative; display: block; margin: 0 .7em 3.5em 0; }
-  .frame::before {                      /* offset accent outline */
-    content: ''; position: absolute; inset: .7em -.7em -.7em .7em;
-    border: 1px solid var(--accent); border-radius: 6px;
-  }
   .frame img {
     position: relative; display: block; width: 9.5em; height: auto;
     border-radius: 6px; padding-top: .4em;
@@ -83,12 +80,6 @@
     box-shadow: 0 10px 24px -14px rgba(30,60,50,.35);
   }
   @media (max-width: 900px) { .frame img { width: 8em; } }
-  @media (max-width: 620px) {
-    #intro { grid-template-columns: 1fr; gap: 0; }
-    .frame { margin: 0 0 2.8em; width: max-content; }
-    .frame img { width: 7em; }
-    #intro .col { padding-bottom: 1.4em; }
-  }
   #intro h1 { margin-bottom: .5em; }
   #intro p { font-family: var(--serif); font-size: 1.28em; line-height: 1.6; color: #5A5344; max-width: 40em; margin-bottom: 0; }
 
@@ -169,17 +160,15 @@
     color: var(--heading); margin: 3.4em 0 1.4em;
   }
   .gallery {
-    overflow: hidden; margin: 0 -4.5em; padding: .5em 0;
+    overflow-x: auto; margin: 0 -4.5em; padding: .5em 0;
+    scrollbar-width: none; -webkit-overflow-scrolling: touch;
     -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
             mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
   }
-  .gallery .track { display: flex; gap: 1em; width: max-content; animation: slide 46s linear infinite; }
-  .gallery:hover .track { animation-play-state: paused; }
-  @keyframes slide { to { transform: translateX(-50%); } }
-  @media (prefers-reduced-motion: reduce) {
-    .gallery { overflow-x: auto; }
-    .gallery .track { animation: none; }
-  }
+  .gallery::-webkit-scrollbar { display: none; }
+  .gallery { scroll-behavior: auto; overscroll-behavior-x: contain; }
+  .gallery .track { display: flex; gap: 1em; width: max-content; }
+
   .shot {
     flex: 0 0 auto; width: 17em; aspect-ratio: 16 / 9; border-radius: 5px;
     position: relative; overflow: hidden; cursor: pointer; border: 0; padding: 0;
@@ -255,6 +244,7 @@
   }
   dialog.gm .x:hover { background: rgba(255,255,255,.3); transform: rotate(90deg); }
 
+  dialog.gm .grip { display: none; }
   dialog.gm .in { padding: 1.8em 2.6em 2.6em; }
 
   /* scroll area */
@@ -401,6 +391,11 @@
     #sidebar .inner { padding: 3em 3em 3.5em; max-width: 60em; margin: 0 auto; }
     #sidebar nav ul { columns: 2; }
   }
+  /* ══ collapsible menu (모바일에서만 접힌다) ══ */
+  #menu > summary { display: none; }          /* 데스크톱에서는 토글 자체를 감춘다 */
+  #menu > summary::-webkit-details-marker { display: none; }
+  #menu > summary::marker { content: ''; }
+
   /* ══ 태블릿 ══ */
   @media (max-width: 860px) {
     #main { padding: 3em 2em 2em; }
@@ -410,7 +405,52 @@
     dialog.gm .in, dialog.gm .strip, dialog.gm .cap { padding-left: 2em; padding-right: 2em; }
   }
 
-  /* ══ 모바일 ══ */
+  /* ══ 사이드바가 아래로 접히는 폭부터: 상단 고정 바 + 접이식 메뉴 ══ */
+  @media (max-width: 1280px) {
+    /* 사이드바를 맨 위 고정 바로 */
+    #sidebar {
+      order: -1; position: sticky; top: 0; z-index: 40;
+      border-top: 0; border-bottom: 1px solid var(--line);
+      background: rgba(241,249,246,.94); backdrop-filter: saturate(180%) blur(12px);
+    }
+    #sidebar .inner { padding: 0 1.4em; max-width: none; }
+
+    #menu > summary {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 1em; padding: .55em 0; cursor: pointer; list-style: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+    #menu > summary .me {
+      font-family: var(--serif); font-size: 1.02em; font-weight: 600; color: var(--heading);
+    }
+    #menu > summary .bars { width: 1.25em; display: grid; gap: 3.5px; }
+    #menu > summary .bars i {
+      height: 2px; background: var(--heading); border-radius: 2px;
+      transition: transform .22s, opacity .22s;
+    }
+    #menu[open] > summary .bars i:nth-child(1) { transform: translateY(5.5px) rotate(45deg); }
+    #menu[open] > summary .bars i:nth-child(2) { opacity: 0; }
+    #menu[open] > summary .bars i:nth-child(3) { transform: translateY(-5.5px) rotate(-45deg); }
+
+    /* 펼침/접힘 높이 전환 — 열 때도 닫을 때도 동작한다 */
+    #menu::details-content {
+      block-size: 0; overflow: hidden; opacity: 0;
+      transition: block-size .34s cubic-bezier(.3,.7,.3,1), opacity .26s ease,
+                  content-visibility .34s allow-discrete;
+    }
+    #menu[open]::details-content {
+      block-size: auto; opacity: 1;
+      max-block-size: 78vh; overflow-y: auto;
+      padding-bottom: 1.6em;
+    }
+    #sidebar .brand { margin-bottom: 1.4em; }
+    #sidebar nav ul { columns: 1; margin-bottom: 2em; }
+    #sidebar footer { padding-bottom: .6em; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    #menu::details-content, #menu > summary .bars i { transition: none; }
+  }
+
   @media (max-width: 640px) {
     body { font-size: 15px; line-height: 1.7; }
     #main { padding: 2.4em 1.4em 1.6em; }
@@ -421,7 +461,13 @@
     h2 { font-size: 1.4em; }
     h3 { font-size: 1.1em; }
 
-    #intro { padding-bottom: 0; margin-bottom: 2.4em; }
+    /* 사진을 이름 위로 올린다 — 텍스트 아래에 남으면 붕 뜬다 */
+    #intro {
+      grid-template-columns: 1fr; gap: 0;
+      padding-bottom: 0; margin-bottom: 2.4em;
+    }
+    .frame { order: -1; width: max-content; margin: 0 0 1.6em; }
+    .frame img { width: 6.4em; }
     #intro .col { padding-bottom: 2em; }
     #intro p { font-size: 1.1em; }
     /* 버튼은 손가락 크기로 — 한 줄에 두 개씩 */
@@ -434,24 +480,36 @@
     .posts { gap: 2.4em; }
     .posts .image { margin-bottom: 1.2em; }
 
-    /* 갤러리: 자동 스크롤 대신 손으로 넘긴다 */
-    .gallery { margin: 0 -1.4em; overflow-x: auto; -webkit-overflow-scrolling: touch;
-               scroll-snap-type: x mandatory; }
-    .gallery .track { animation: none; padding: 0 1.4em; gap: .8em; }
-    .shot { width: 78vw; max-width: 20em; scroll-snap-align: center; }
+    /* 갤러리: 자동으로 흐르되 손으로도 넘길 수 있다 */
+    .gallery { margin: 0 -1.4em; }
+    .gallery .track { gap: .8em; }
+    .shot { width: 62vw; max-width: 17em; }
 
-    /* 상세창: 화면을 채우는 시트로 */
+    /* 상세창: 아래에서 올라오는 시트 — 드래그해서 내릴 수 있다 */
     dialog.gm {
-      max-height: 92vh; width: 100%; max-width: 100%;
-      margin: auto auto 0; border-radius: 14px 14px 0 0;
+      max-height: 88vh; width: 100%; max-width: 100%;
+      margin: auto auto 0; border-radius: 16px 16px 0 0;
+      touch-action: none;
     }
-    dialog.gm .sheet { max-height: 92vh; }
+    dialog.gm .sheet { max-height: calc(88vh - 1.6em); touch-action: pan-y; }
+    dialog.gm .grip {
+      display: block; height: 1.6em; position: relative; flex: 0 0 auto;
+      cursor: grab; touch-action: none;
+    }
+    dialog.gm .grip::before {
+      content: ''; position: absolute; left: 50%; top: .6em; translate: -50% 0;
+      width: 2.6em; height: 4px; border-radius: 99px; background: var(--line);
+    }
+    dialog.gm.dragging { transition: none; }
     dialog.gm .in { padding: 1.4em 1.4em 2em; }
     dialog.gm .strip { padding: .9em 1.4em; gap: .5em; }
     dialog.gm .strip img { height: 4.2em; }
     dialog.gm .cap { padding: 0 1.4em 1.2em; }
     dialog.gm .cap h3 { font-size: 1.3em; }
     dialog.gm p { font-size: .98em; text-align: left; }   /* 좁은 폭에선 양끝맞춤이 벌어진다 */
+    dialog.gm .in { display: flex; flex-direction: column; }
+    dialog.gm .go { order: 1; margin: 0 0 1.4em; }
+    dialog.gm .tags { order: 2; }                          /* 키워드는 맨 아래 */
     dialog.gm .x { width: 2.6em; height: 2.6em; top: .7em; right: .7em; }
 
     .rows .r { padding: 1em 0; }
@@ -480,9 +538,9 @@
         <li><a href="mailto:castlehanaa@gmail.com" class="button">Email</a></li>
       </ul>
       </div>
-      <!-- <span class="frame">
+      <span class="frame">
         <img src="img/profile.png" width="616" height="820" alt="Portrait of SeongWon Ahn">
-      </span> -->
+      </span>
     </section>
 
 
@@ -571,6 +629,12 @@
   <div id="sidebar">
     <div class="inner">
 
+      <details id="menu" open>
+      <summary>
+        <span class="me">SeongWon Ahn</span>
+        <span class="bars" aria-hidden="true"><i></i><i></i><i></i></span>
+      </summary>
+
       <a href="#intro" class="brand">
         <strong>SeongWon Ahn</strong>
         <span>M.S. Student · Korea University<br>DXP Lab — HCI · VR/XR</span>
@@ -601,6 +665,7 @@
       </section>
 
       <footer>&copy; 2026 SeongWon Ahn. All rights reserved.</footer>
+      </details>
 
     </div>
   </div>
@@ -609,6 +674,7 @@
 
 <dialog class="gm" id="gm">
   <button class="x" onclick="gm.close()" aria-label="Close">&#10005;</button>
+  <div class="grip" id="gmGrip"></div>
   <div class="sheet" id="gmSheet">
   <div class="hero" id="gmHero">
     <div class="spin"></div>
@@ -663,8 +729,7 @@
       <span class="yr">${g.badge || g.year}</span>
       <span class="cap">${g.title}</span>
     </button>`);
-  const loop = !matchMedia('(max-width: 640px)').matches;   // 모바일은 손으로 넘긴다
-  (loop ? [...GAMES, ...GAMES] : GAMES).forEach(g => track.append(shot(g)));
+  [...GAMES, ...GAMES].forEach(g => track.append(shot(g)));   // 2벌 — 되감기용
 
   // ── popup ──
   // 히어로에 영상 또는 이미지 하나를 올린다
@@ -750,6 +815,69 @@
     setHero(gmStrip.items[+e.target.dataset.i], gmStrip.art);
     for (const img of gmStrip.children) img.classList.toggle('on', img === e.target);
   });
+
+  // ── 모바일 메뉴: 좁은 화면에서만 접는다 ──
+  const narrow = matchMedia('(max-width: 1280px)');
+  const syncMenu = () => { menu.open = !narrow.matches; };
+  syncMenu();
+  narrow.addEventListener('change', syncMenu);
+  menu.querySelector('nav').addEventListener('click', e => {
+    if (e.target.tagName === 'A' && narrow.matches) menu.open = false;
+  });
+
+  // ── 갤러리: 스크롤이 우선, 스크롤이 없을 때만 자동으로 흐른다 ──
+  const gal = document.querySelector('.gallery');
+  const calm = matchMedia('(prefers-reduced-motion: reduce)');
+  let over = false, down = false;
+  let seen = 0;      // 지난 프레임에 관측한 scrollLeft
+
+  const tick = () => {
+    const w = track.scrollWidth / 2;                    // 한 벌의 폭
+    const at = gal.scrollLeft;
+    // 내가 두고 간 값과 다르면 사용자(또는 관성)가 움직인 것 — 이번 프레임은 양보한다
+    const moved = Math.abs(at - seen) > 1;
+
+    if (w > 0 && !over && !down && !moved && !calm.matches) {
+      let next = at + 0.6;
+      if (next >= w) next -= w;                          // 오른쪽 끝 → 되감기
+      gal.scrollLeft = next;
+    } else if (w > 0 && at < 1) {
+      gal.scrollLeft = at + w;                           // 왼쪽 끝 → 되감기
+    }
+
+    seen = gal.scrollLeft;
+    requestAnimationFrame(tick);
+  };
+
+  gal.addEventListener('pointerenter', () => { over = true; });
+  gal.addEventListener('pointerleave', () => { over = false; });
+  gal.addEventListener('pointerdown',  () => { down = true; });
+  addEventListener('pointerup',        () => { down = false; });
+  addEventListener('pointercancel',    () => { down = false; });
+
+  requestAnimationFrame(tick);
+
+  // 시트: 아래로 끌어 닫기 (모바일)
+  let y0 = null, dy = 0;
+  gmGrip.addEventListener('pointerdown', e => {
+    y0 = e.clientY; dy = 0;
+    gm.classList.add('dragging');
+    gmGrip.setPointerCapture(e.pointerId);
+  });
+  gmGrip.addEventListener('pointermove', e => {
+    if (y0 === null) return;
+    dy = Math.max(0, e.clientY - y0);
+    gm.style.translate = `0 ${dy}px`;
+  });
+  const endDrag = () => {
+    if (y0 === null) return;
+    gm.classList.remove('dragging');
+    gm.style.translate = '';
+    if (dy > 110) gm.close();
+    y0 = null;
+  };
+  gmGrip.addEventListener('pointerup', endDrag);
+  gmGrip.addEventListener('pointercancel', endDrag);
 
   gm.addEventListener('click', e => { if (e.target === gm) gm.close(); });   // click backdrop
 
