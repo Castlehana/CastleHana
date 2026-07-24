@@ -698,9 +698,11 @@
 <script>
   const el = (html) => Object.assign(document.createElement('template'), { innerHTML: html }).content.firstElementChild;
 
+  // 커버 영상 + 추가 클립들의 포스터 파일명 — 썸네일 목록에서 제외
+  const posterNames = (o) => [o.poster, ...(o.clips || []).map(c => c.poster)].filter(Boolean);
   // 폴더 스캔 결과(manifest.js) 우선, 없으면 projects.js 의 images 사용
   const shots = (o) => ((typeof IMAGES !== 'undefined' && IMAGES[o.dir]) || o.images || [])
-    .filter(f => f !== o.poster)              // 영상 포스터는 썸네일에서 제외
+    .filter(f => !posterNames(o).includes(f))
     .map(f => o.dir + f);
   const first = (o) => shots(o)[0] || null;
   const clip  = (o) => o.video ? o.dir + o.video : null;
@@ -754,11 +756,12 @@
     }
   };
 
-  const open = ({ art, title, sub, desc, tags, shots, video, poster, link }) => {
+  const open = ({ art, title, sub, desc, tags, shots, video, poster, clips, link }) => {
     // 영상이 있으면 그것도 썸네일 하나로 취급한다 — 되돌아갈 수 있어야 하므로
     const items = [
       ...(video ? [{ video, thumb: poster, src: poster }] : []),
       ...(shots || []).map(src => ({ src })),
+      ...(clips || []).map(c => ({ video: c.video, thumb: c.poster, src: c.poster })),  // 맨 뒤
     ];
     setHero(items[0], art);
 
@@ -792,7 +795,9 @@
     const p = PROJECTS[i];
     open({ art: p.art, title: p.title, sub: p.role, desc: p.detail, tags: p.tags,
            shots: shots(p),
-           video: clip(p), poster: p.poster ? p.dir + p.poster : '', link: p.link });
+           video: clip(p), poster: p.poster ? p.dir + p.poster : '',
+           clips: (p.clips || []).map(c => ({ video: p.dir + c.video, poster: p.dir + c.poster })),
+           link: p.link });
   };
   posts.addEventListener('click', e => {
     const a = e.target.closest('article'); if (a) openCard([...posts.children].indexOf(a));

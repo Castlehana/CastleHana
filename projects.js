@@ -21,6 +21,10 @@ const PROJECTS = [
   {
     art: 'art-gs',
     dir: 'img/projects/gs-editor/',
+    video: 'gs-editor.mp4',
+    poster: 'gs-editor-poster.jpg',
+    clips: [{ video: 'gs-editor-2.mp4', poster: 'gs-editor-2-poster.jpg' }],   // 맨 뒤 썸네일
+    link: { label: 'GitHub', url: 'https://github.com/sfacspace/sfacstudio-viewer' },
     title: 'Web-Based Real-Time 3D/4D Gaussian Splatting Editor',
     role: 'R&D Researcher, Computer Vision · SFACSPACE · 2026',
     summary: 'A browser-based 3D/4D Gaussian Splatting editor with point-level editing, camera animation, and real-time shader relighting.',
