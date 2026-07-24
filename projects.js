@@ -83,7 +83,7 @@ const PROJECTS = [
     dir: 'img/projects/tcn-sports/',
     link: { label: 'Demo video', url: 'https://youtu.be/-o-8sM5wLj8' },
     title: 'Real-Time Immersive Sports Game Based on TCN',
-    role: 'Team Leader / AI Developer · Senior Capstone Project · 2026',
+    role: 'Team Leader / AI Developer · Senior Capstone Project · 2025',
     summary: 'A badminton simulator that reads your swing from a single webcam. Led the AI pipeline end to end — labeling, training, real-time inference.',
     detail:
       'The goal: swing a real racket and have the game recognise the stroke in real time, from ' +
