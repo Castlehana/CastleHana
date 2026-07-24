@@ -275,6 +275,7 @@
   dialog.gm .tags { margin: 0; }
   dialog.gm .go { display: inline-block; margin: 0 0 1.6em; }
   dialog.gm .go:empty { display: none; }
+  dialog.gm .go .button + .button { margin-left: .5em; }
 
   dialog.gm .strip {
     display: flex; gap: .6em; overflow-x: auto;
@@ -706,7 +707,17 @@
     .map(f => o.dir + f);
   const first = (o) => shots(o)[0] || null;
   const clip  = (o) => o.video ? o.dir + o.video : null;
-  const still = (o) => (o.poster ? o.dir + o.poster : null) || first(o);   // card stays static
+  // media[] 가 있으면 이미지·영상을 그 순서대로 (각 항목 {img} 또는 {video,poster})
+  const resolveMedia = (o) => o.media
+    ? o.media.map(m => m.video
+        ? { video: o.dir + m.video, thumb: o.dir + m.poster, src: o.dir + m.poster }
+        : { src: o.dir + m.img })
+    : null;
+  const still = (o) => {
+    const m = resolveMedia(o);
+    if (m) return m[0].src;                                   // media 첫 항목이 커버
+    return (o.poster ? o.dir + o.poster : null) || first(o);  // card stays static
+  };
   const videoTag = (src, poster) =>
     `<video src="${src}"${poster ? ` poster="${poster}"` : ''}
             autoplay muted loop playsinline preload="auto"></video>`;
@@ -756,12 +767,12 @@
     }
   };
 
-  const open = ({ art, title, sub, desc, tags, shots, video, poster, clips, link }) => {
-    // 영상이 있으면 그것도 썸네일 하나로 취급한다 — 되돌아갈 수 있어야 하므로
-    const items = [
+  const open = ({ art, title, sub, desc, tags, shots, video, poster, clips, media, link, links }) => {
+    // media[] 가 주어지면 그 순서 그대로, 아니면 커버영상 → 이미지들 → 추가클립 순
+    const items = media || [
       ...(video ? [{ video, thumb: poster, src: poster }] : []),
       ...(shots || []).map(src => ({ src })),
-      ...(clips || []).map(c => ({ video: c.video, thumb: c.poster, src: c.poster })),  // 맨 뒤
+      ...(clips || []).map(c => ({ video: c.video, thumb: c.poster, src: c.poster })),
     ];
     setHero(items[0], art);
 
@@ -776,9 +787,9 @@
     gmM.textContent = sub;
     gmD.textContent = desc;
     gmTags.innerHTML = (tags || []).map(t => `<li>${t}</li>`).join('');
-    gmGo.innerHTML = link
-      ? `<a class="button small" href="${link.url}" target="_blank" rel="noopener">${link.label} &#8599;</a>`
-      : '';
+    gmGo.innerHTML = (links || (link ? [link] : []))
+      .map(l => `<a class="button small" href="${l.url}" target="_blank" rel="noopener">${l.label} &#8599;</a>`)
+      .join('');
     gm.showModal();
     gmSheet.scrollTop = 0;                 // showModal 이후여야 먹는다 (그 전엔 display:none)
     requestAnimationFrame(() => { gmSheet.scrollTop = 0; syncFade(); });
@@ -797,7 +808,8 @@
            shots: shots(p),
            video: clip(p), poster: p.poster ? p.dir + p.poster : '',
            clips: (p.clips || []).map(c => ({ video: p.dir + c.video, poster: p.dir + c.poster })),
-           link: p.link });
+           media: resolveMedia(p),
+           link: p.link, links: p.links });
   };
   posts.addEventListener('click', e => {
     const a = e.target.closest('article'); if (a) openCard([...posts.children].indexOf(a));

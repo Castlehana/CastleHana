@@ -1,10 +1,10 @@
 // AUTO-GENERATED — 직접 고치지 마세요. `python3 tools/scan-images.py` 로 다시 만듭니다.
 const IMAGES = {
   "img/projects/gs-editor/": [
-    "05-camera-path.jpg",
-    "06-point-selection.jpg",
     "gs-editor-2-poster.jpg",
-    "gs-editor-poster.jpg"
+    "gs-editor-3-poster.jpg",
+    "gs-editor-poster.jpg",
+    "point-selection-poster.jpg"
   ],
   "img/projects/lidar-fusion/": [
     "01-pipeline.jpg",
