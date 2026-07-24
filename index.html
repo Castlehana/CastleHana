@@ -776,9 +776,9 @@
     gmGo.innerHTML = link
       ? `<a class="button small" href="${link.url}" target="_blank" rel="noopener">${link.label} &#8599;</a>`
       : '';
-    gmSheet.scrollTop = 0;
     gm.showModal();
-    requestAnimationFrame(syncFade);
+    gmSheet.scrollTop = 0;                 // showModal 이후여야 먹는다 (그 전엔 display:none)
+    requestAnimationFrame(() => { gmSheet.scrollTop = 0; syncFade(); });
   };
 
   const syncFade = () => {
