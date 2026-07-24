@@ -25,14 +25,15 @@ const PROJECTS = [
     role: 'R&D Researcher, CV · SFACSPACE · 2026',
     summary: 'A browser-based 3D/4D Gaussian Splatting viewer with point-level editing, camera animation, and real-time shader relighting.',
     detail:
-      'A trained Gaussian Splatting capture has millions of unstructured points and no handles. ' +
-      'This viewer gives it an editor — inspect, clean, animate, and export a 3D or 4D splat ' +
-      'in the browser.\n\n' +
-      'As an R&D researcher on the CV team I built the editing and camera side: a 2D brush and ' +
-      '3D box/sphere volumes for removing stray splats, and keyframed camera markers ' +
-      'interpolated into paths that drive 4D playback along a timeline. I also implemented ' +
-      'shader-based real-time relighting with point lights and HDRI, so a capture can be re-lit ' +
-      'interactively — all in WebGL, no plugin, no desktop build.',
+      'A trained Gaussian Splatting capture is millions of unordered splats with no mesh and no ' +
+      'handle to grab. This browser-based editor turns that raw output into something you can ' +
+      'work with — clean it, relight it, and film it, all in WebGL.\n\n' +
+      'I owned the editing, camera, and lighting stages. For editing I built the selection ' +
+      'tools — a 2D screen-space brush and 3D box/sphere volumes — that let noise and floaters ' +
+      'be removed directly on the model. For camera I built keyframed markers interpolated into ' +
+      'a path, doubling as the timeline that scrubs 4D playback. And I implemented shader-based ' +
+      'real-time relighting for both 3D and 4D splats, shading each splat at draw time against ' +
+      'point lights and HDRI so a capture can be re-lit live in the browser.',
     tags: ['Gaussian Splatting', 'Real-Time Rendering', 'Shading', 'Relighting', 'WebGL'],
   },
   {
@@ -44,15 +45,19 @@ const PROJECTS = [
     role: 'R&D Researcher, CV · SFACSPACE · 2026',
     summary: 'End-to-end pipeline fusing LiDAR and a 360° camera into 3DGS / SLAM inputs, with custom calibration and time-synchronization tools.',
     detail:
-      'Photorealistic reconstruction needs accurate geometry and dense colour, which rarely ' +
-      'arrive together. We paired a Livox MID-360 with an Insta360 X5, and I built the pipeline ' +
-      'that turns two unrelated recordings into one time-aligned dataset.\n\n' +
-      'On the image side, equirectangular footage is projected into cube faces and then a ' +
-      'pinhole view per face. On the fusion side, an anchor-based scheme reconciles a 10 Hz ' +
-      'LiDAR stream with 30 Hz video using a shared clock and a physical shake marker. I also ' +
-      'developed the calibration tools it depends on — per-face intrinsics validated against ' +
-      'their theoretical values, and LiDAR-to-camera extrinsics refined against the point ' +
-      'cloud. Output feeds SLAM and 3DGS training directly.',
+      'Photorealistic reconstruction needs accurate geometry and dense colour, and no single ' +
+      'sensor gives both. Pairing a Livox MID-360 LiDAR with an Insta360 X5, I built the ' +
+      'pipeline that fuses their two independent recordings into one calibrated, time-aligned ' +
+      'dataset for SLAM and Gaussian Splatting.\n\n' +
+      'I built the image path — equirectangular video reprojected to cube faces, each treated ' +
+      'as a pinhole camera — and the calibration behind it, recovering per-face intrinsics from ' +
+      'checkerboards and validating each against the values a cube projection should produce, ' +
+      'then solving the LiDAR-to-camera extrinsics against the point cloud.\n\n' +
+      'For time alignment I designed an anchor scheme: a deliberate shake at the start leaves a ' +
+      'signature in both the IMU and the video, and matching it fixes the offset so every frame ' +
+      'pairs with its nearest scan. I packaged the whole thing as a containerised bag fuser that ' +
+      'outputs rectified images, camera poses, and a registered point cloud — exactly what the ' +
+      'downstream stages ingest.',
     tags: ['Sensor Fusion', 'Calibration', 'Time Sync', 'SLAM', '3D Reconstruction'],
   },
   {
@@ -63,17 +68,19 @@ const PROJECTS = [
     role: 'Team Lead / AI Developer · Capstone Design · 2026',
     summary: 'A badminton simulator that reads your swing from a single webcam. Led the AI pipeline end to end — labeling, training, real-time inference.',
     detail:
-      'Play badminton against an AI using nothing but a webcam. We tried the hardware route ' +
-      'first — an IMU taped to a racket — and abandoned it once noise and latency made ' +
-      'real-time response impossible.\n\n' +
-      'As team lead I designed the architecture and built the recognition system. MediaPipe ' +
-      'tracks the body without a GPU; six key joints become a 16-dimensional feature sequence, ' +
-      'normalised against the torso so body size and camera distance stop mattering. Swings ' +
-      'are cut into 33-frame clips centred on the wrist-speed peak and classified by a TCN into ' +
-      'five stroke types. I also built the labelling tool and a dataset of 2,000 swings from 40 ' +
-      'videos, split at video level to prevent leakage — 0.980 macro F1 on the held-out set. ' +
-      'Exported to ONNX, it runs inside Unity on CPU and streams over UDP. Grand Prize, 2025 ' +
-      'Winter Capstone Design Competition.',
+      'The goal: swing a real racket and have the game recognise the stroke in real time, from ' +
+      'one webcam and no GPU. We tried an IMU on the racket first and abandoned it to noise and ' +
+      'latency. As team lead I designed the architecture and built the recognition pipeline end ' +
+      'to end.\n\n' +
+      'From MediaPipe pose landmarks I kept the six joints that carry a swing and turned them ' +
+      'into a 16-dimensional feature — positions, velocities, accelerations, angles — normalised ' +
+      'against the torso so body size and distance stop mattering, then segmented the stream ' +
+      'into fixed clips centred on the wrist-speed peak. A Temporal Convolutional Network of ' +
+      'dilated convolutions classifies each clip into five strokes plus idle.\n\n' +
+      'I also built the labelling tool and a 2,000-swing dataset from 40 videos, split at the ' +
+      'video level to prevent leakage — 0.980 macro F1 on held-out data. I exported the model to ' +
+      'ONNX to run inside Unity on CPU and stream over UDP. It was the project\'s core AI output ' +
+      'and won the Grand Prize at the 2025 Winter Capstone Design Competition.',
     tags: ['Pose Estimation', 'Action Recognition', 'Time-Series', 'Real-Time Inference', 'Dataset Design'],
   },
 ];
@@ -88,17 +95,15 @@ const GAMES = [
     badge: '2024–26',
     link: { label: 'Play on itch.io', url: 'https://potatoteam.itch.io/attis' },
     detail:
-      'ATTIS inverts the defence genre: you never attack, and you never control the ' +
-      'protagonist. Aetheris walks toward wherever you shine your light, and your job is to ' +
-      'guide him and shield him while he revives the dying. If he falls, a creature you already ' +
+      'A defence game where you never attack and never control the character you protect. ' +
+      'Aetheris moves toward your light; you guide him, spark him to react, and shield him while ' +
+      'he revives the dying. Save ten to clear a stage — and if he falls, a creature you already ' +
       'saved is sacrificed to bring him back.\n\n' +
-      'I led a team of seven as team lead and lead designer, owning the story, emotional ' +
-      'direction, and system balance. The assistive cursor control was the hardest call — less ' +
-      'intuitive and far buggier to build than direct control, but it is why the player reads ' +
-      'as a guardian rather than a pilot. Leadership was the harder lesson: two members left ' +
-      'early, and my flexibility quietly dissolved the deadlines with them. Fixed deadlines, ' +
-      'weekly progress reviews, and one-on-ones rebuilt it. Art and sound are done; the game is ' +
-      'in polish ahead of release.',
+      'As team lead and lead designer of a seven-person team I owned the story, emotional ' +
+      'direction, and system balance. I made the assistive cursor control the core verb — ' +
+      'harder to build than direct control, but it is what makes the player a guardian rather ' +
+      'than a pilot — and directed the camera as a mood tool, storyboarded in Figma. When two ' +
+      'members left early, I rebuilt the team on fixed deadlines, weekly reviews, and one-on-ones.',
   },
   {
     cover: 'g2',
@@ -107,15 +112,15 @@ const GAMES = [
     meta: 'Unreal Engine · Team Lead / Systems Design',
     year: '2025',
     detail:
-      'Whack-a-mole where the mole plays too. Two people share one keyboard and a split screen ' +
-      '— the farmer hunts with a hammer, the mole tunnels underground and surfaces to steal ' +
-      'crops. Neither can see the other\'s half, and that asymmetry is the game.\n\n' +
-      'I led a team of five as team lead and systems designer. The technical core is Unreal\'s ' +
-      'local multiplayer: two controller IDs, two pawns, one split screen, so the information ' +
-      'gap is enforced by the camera rather than by rules. Items were designed against two axes ' +
-      '— disrupt the opponent, or adjust risk — and tuned by cooldown rather than power. The ' +
-      'goal was local play itself: short rounds where you react to the person beside you, not ' +
-      'their avatar.',
+      'Whack-a-mole where the mole plays too. Two players share one keyboard and a split screen ' +
+      '— farmer versus mole — and neither can see the other\'s half, so the information gap is ' +
+      'the whole game.\n\n' +
+      'As team lead and systems designer of a five-person team, I built the split-screen local ' +
+      'multiplayer on Unreal so the asymmetry comes from the camera, not from rules. I designed ' +
+      'every item against two axes — disrupt the opponent, or adjust risk — and balanced them by ' +
+      'cooldown rather than power, keeping a steady tempo while still allowing sudden reversals. ' +
+      'The whole design targets local play: short, loud rounds where you read the person beside ' +
+      'you.',
   },
   {
     cover: 'g3',
@@ -125,16 +130,15 @@ const GAMES = [
     year: '2025',
     link: { label: 'Play', url: 'https://farminglog.farmsystem.kr/game' },
     detail:
-      'A decorative tycoon sim built into a software club\'s homepage — plant a seed once a ' +
-      'day, harvest, and slowly make a quarter-view plot your own. Deliberately slow: a browser ' +
-      'game on a club site should reward a two-minute visit, not demand a session.\n\n' +
-      'I joined after the project had broken — the original designer was writing specs for the ' +
-      'first time and the PM had left mid-development — as lead designer, PM, and UI designer ' +
-      'at once. Before any feature work I rebuilt the scaffolding: a Notion workspace, written ' +
-      'development conventions, art specs kept separate from development specs, UI flows ' +
-      'prototyped in Figma, weekly sprint reviews. After launch almost nobody played it; there ' +
-      'was no tutorial. I designed a visual detail page showing the loop in one scroll, and ' +
-      'play rate among members went from 12% to 65%.',
+      'A slow, decorative farming sim built into a software club\'s website — plant once a day, ' +
+      'harvest, and make a quarter-view plot your own. Paced to reward a two-minute visit, not a ' +
+      'session.\n\n' +
+      'I joined after the project had broken — its planner was new to specs and the PM had left ' +
+      '— and took it over as lead designer, PM, and UI designer. Before any feature I rebuilt ' +
+      'the scaffolding: a Notion workspace, written dev conventions, separate art and dev specs, ' +
+      'Figma UI flows, weekly sprints. When it shipped with no tutorial and nobody played, I ' +
+      'designed a visual detail page that showed the whole loop in one scroll — and play among ' +
+      'members rose from 12% to 65%.',
   },
   {
     cover: 'g4',
@@ -143,16 +147,15 @@ const GAMES = [
     meta: 'Unity · Team Lead / Design / Art / Dev',
     year: '2024',
     detail:
-      'You are the cat. The goal is a treat locked in a box across the house, and the only ' +
-      'obstacle is the human. Knock a cup off a table and the sound pulls them away to clean ' +
-      'it up — that gap is your opening. Most cat games ask you to admire one; here the cat is ' +
-      'the strategist.\n\n' +
-      'A three-person project where I was team lead and the only designer, artist, and third ' +
-      'developer. The system I care most about is the mess mechanic: knocking things over is ' +
-      'the cat\'s most instinctive behaviour, so I made it the strategic verb. Doing it too ' +
-      'often teaches the human your pattern and speeds up their response, which turns a joke ' +
-      'into a risk budget. Three stages escalate from quiet cushions to breakable plates to a ' +
-      'room with nowhere to hide. Placed first in both peer and professor evaluation.',
+      'You are the cat, stealing a treat across the house while the human cleans up after your ' +
+      'mess. Knock something over, slip through the gap it creates, and reach the box before the ' +
+      'timer runs out. The cat is the strategist; the human is the obstacle.\n\n' +
+      'As team lead — and the sole designer, artist, and third developer of a three-person team ' +
+      '— I made the mess mechanic the strategic core: knocking things over is instinctive, but ' +
+      'doing it too often teaches the human your pattern, turning a joke into a risk budget. I ' +
+      'designed three stages that escalate through material, from quiet cushions to breakable ' +
+      'dishes to a room with nowhere to hide. It placed first in both peer and professor ' +
+      'evaluation.',
   },
   {
     cover: 'g5',
@@ -162,14 +165,14 @@ const GAMES = [
     year: '2024',
     detail:
       'A man wakes in the dark without his name. Voidlight is an interactive story about ' +
-      'recovering three fragments — a name, a calling, a family — across the rooms of a life, ' +
-      'built in 48 hours for the 2024 GameMakers jam.\n\n' +
-      'I owned the scenario and the structure. The design question was how to make a player ' +
-      'feel a memory rather than read one, so nothing is exposition: each fragment is recovered ' +
-      'by handling objects in a first-person scene, and lighting, colour, and sound brighten in ' +
-      'step with how much has been remembered — progress is legible without a single UI ' +
-      'element. The story was drawn from the real death of a firefighter on duty. The feedback ' +
-      'we kept hearing was that it was short but stayed with people.',
+      'recovering three fragments of an identity across the rooms of a life — built in 48 hours ' +
+      'for a game jam.\n\n' +
+      'I owned the scenario and structure. My design goal was to make the player feel a memory ' +
+      'rather than read one: nothing is exposition — each fragment is recovered by handling ' +
+      'objects, and lighting, colour, and sound brighten with what is remembered, so progress ' +
+      'reads without a single UI element. I scripted the emotional beats and cutscene timing and ' +
+      'kept testing the tempo so immersion never broke. Drawn from the real death of a ' +
+      'firefighter on duty, it was praised as short but lasting.',
   },
   {
     cover: 'g6',
@@ -179,16 +182,14 @@ const GAMES = [
     year: '2024',
     link: { label: 'Play', url: 'https://mandlemandle.com/project/flux/game' },
     detail:
-      'FluX changes how you control it every ten seconds — runner, then mouse-driven, then ' +
-      'shooter. The switch is the mechanic, keeping a ten-minute arcade game from ever settling ' +
-      'into muscle memory. Fuel doubles as health, and bullets collected while running are what ' +
-      'you fire at the boss.\n\n' +
-      'My first competition and first team project, in my second semester. I led four people as ' +
-      'designer and, with no artist available, made all the art myself — UI in Figma, ' +
-      'characters and backgrounds in Illustrator, on a minimal geometric system borrowed from ' +
-      'Geometry Dash. It is also where I learned what a spec is for: my first one was written ' +
-      'from the designer\'s point of view and left developers guessing, so I redrew the systems ' +
-      'as flowcharts and broke every feature down to something readable straight into code. ' +
-      '1st in the judging round, 3rd in user score.',
+      'An arcade game that changes how you control it every ten seconds — runner, then mouse, ' +
+      'then shooter — so it never settles into muscle memory. Fuel doubles as health, and ' +
+      'bullets caught while dodging are what you fire at the boss.\n\n' +
+      'My first competition and first team project. I led four people as designer and, with no ' +
+      'artist, made all the art myself — UI in Figma, characters and backgrounds in Illustrator, ' +
+      'on a minimal geometric system. It was where I learned what a spec is for: my first left ' +
+      'developers guessing, so I redrew the systems as flowcharts and broke every feature down ' +
+      'to something readable straight into code. FluX placed 1st in the judging round and 3rd in ' +
+      'user score.',
   },
 ];
