@@ -87,6 +87,8 @@ const PROJECTS = [
   {
     art: 'art-tcn',
     dir: 'img/projects/tcn-sports/',
+    video: 'swing-recognition.mp4',
+    poster: 'swing-recognition-poster.jpg',
     link: { label: 'Demo video', url: 'https://youtu.be/-o-8sM5wLj8' },
     title: 'Real-Time Immersive Sports Game Based on TCN',
     role: 'Team Leader / AI Developer · Senior Capstone Project · 2025',
@@ -115,6 +117,12 @@ const GAMES = [
   {
     cover: 'g1',
     dir: 'img/games/attis/',
+    thumb: '1-title.jpg',                     // 갤러리 커버
+    media: [                                  // 첫 항목: 썸네일 사진을 누르면 트레일러 재생
+      { video: 'attis-trailer.mp4', poster: '1-title.jpg' },
+      { img: '3-stage.jpg' }, { img: '4-world-tree.jpg' },
+      { img: '5-purify.jpg' }, { img: '6-tree-lit.jpg' }, { img: '7-cave.jpg' },
+    ],
     title: 'ATTIS',
     meta: 'Unity · Team Leader / PM · Game Design',
     year: '2024–2026',
@@ -135,6 +143,11 @@ const GAMES = [
   {
     cover: 'g2',
     dir: 'img/games/ddang/',
+    thumb: '1-title.jpg',
+    media: [
+      { video: 'detector.mp4', poster: '1-title.jpg' },
+      { img: '3-farmer-view.jpg' }, { img: '4-item-ui.jpg' }, { img: '5-victory.jpg' },
+    ],
     title: 'DDANG! DDANG! DDANG!',
     meta: 'Unreal Engine · Team Leader / PM · Game Design · Systems',
     year: '2025',
@@ -170,6 +183,15 @@ const GAMES = [
   {
     cover: 'g4',
     dir: 'img/games/cats-meow/',
+    thumb: '1-thumb.jpg',                      // 갤러리 커버
+    media: [                                   // 첫 항목: 썸네일 사진을 누르면 주방 영상 재생
+      { video: '1-kitchen.mp4', poster: '1-thumb.jpg' },
+      { img:   'kitchen-cabinet.jpg' },
+      { video: '2-office.mp4',  poster: '2-office-poster.jpg' },
+      { img:   'office-desk.jpg' },
+      { img:   'office-human.jpg' },
+    ],
+    link: { label: 'Play', url: 'https://castlehana.itch.io/catsmeow' },
     title: "Cat's Meow",
     meta: 'Unity · Team Leader / PM · Game Design · Art · Dev',
     year: '2024',
@@ -187,6 +209,11 @@ const GAMES = [
   {
     cover: 'g5',
     dir: 'img/games/voidlight/',
+    clips: [                                 // 기존 이미지 뒤에 붙는 영상 시각자료
+      { video: '1-bedroom.mp4',     poster: '1-bedroom-poster.jpg' },
+      { video: '2-exploration.mp4', poster: '2-exploration-poster.jpg' },
+      { video: '3-firefighter.mp4', poster: '3-firefighter-poster.jpg' },
+    ],
     title: 'Voidlight',
     meta: 'Unity · Scenario & Game Design · 48h Jam',
     year: '2024',
@@ -205,6 +232,12 @@ const GAMES = [
   {
     cover: 'g6',
     dir: 'img/games/flux/',
+    thumb: '1-title.jpg',
+    media: [
+      { video: 'flux-play.mp4', poster: '1-title.jpg' },
+      { img: '2-stage.jpg' }, { img: '3-boss.jpg' },
+      { img: '4-tutorial.jpg' }, { img: '5-system-flow.jpg' },
+    ],
     title: 'FluX',
     meta: 'Unity · Team Leader / PM · Game Design · Art',
     year: '2024',

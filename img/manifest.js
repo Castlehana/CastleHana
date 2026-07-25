@@ -13,30 +13,33 @@ const IMAGES = {
     "fusion-3dgs-poster.jpg"
   ],
   "img/projects/tcn-sports/": [
-    "00-architecture.jpg",
-    "01-gameplay.jpg",
-    "02-pose-extraction.jpg",
-    "03-feature-clip.jpg",
-    "04-unity-pipeline.jpg",
-    "05-training-curve.jpg"
+    "01-data-collection.jpg",
+    "02-feature-extraction.jpg",
+    "03-architecture.jpg",
+    "04-stroke-types.jpg",
+    "05-trajectories.jpg",
+    "06-training-curve.jpg",
+    "07-unity-integration.jpg",
+    "08-gameplay.jpg",
+    "swing-recognition-poster.jpg"
   ],
   "img/games/attis/": [
     "1-title.jpg",
-    "2-gameplay.jpg",
     "3-stage.jpg",
     "4-world-tree.jpg",
-    "5-character.jpg"
+    "5-purify.jpg",
+    "6-tree-lit.jpg",
+    "7-cave.jpg"
   ],
   "img/games/cats-meow/": [
-    "1-gameplay.jpg",
-    "2-tutorial.jpg",
-    "3-caught.jpg",
-    "4-stage-living-room.jpg",
-    "5-clear.jpg"
+    "1-thumb.jpg",
+    "2-office-poster.jpg",
+    "kitchen-cabinet.jpg",
+    "office-desk.jpg",
+    "office-human.jpg"
   ],
   "img/games/ddang/": [
     "1-title.jpg",
-    "2-split-screen.jpg",
     "3-farmer-view.jpg",
     "4-item-ui.jpg",
     "5-victory.jpg"
@@ -56,8 +59,11 @@ const IMAGES = {
     "5-spec.jpg"
   ],
   "img/games/voidlight/": [
+    "1-bedroom-poster.jpg",
     "1-title.jpg",
+    "2-exploration-poster.jpg",
     "2-hospital.jpg",
+    "3-firefighter-poster.jpg",
     "3-firefighter.jpg",
     "4-family.jpg",
     "5-light.jpg"

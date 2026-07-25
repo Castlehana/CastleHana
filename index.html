@@ -699,13 +699,18 @@
 <script>
   const el = (html) => Object.assign(document.createElement('template'), { innerHTML: html }).content.firstElementChild;
 
-  // 커버 영상 + 추가 클립들의 포스터 파일명 — 썸네일 목록에서 제외
-  const posterNames = (o) => [o.poster, ...(o.clips || []).map(c => c.poster)].filter(Boolean);
+  // 커버/클립/media 영상의 포스터 파일명 — 이미지 썸네일 목록에서 제외
+  const posterNames = (o) => [
+    o.poster,
+    ...(o.clips || []).map(c => c.poster),
+    ...(o.media || []).map(m => m.poster),
+  ].filter(Boolean);
   // 폴더 스캔 결과(manifest.js) 우선, 없으면 projects.js 의 images 사용
   const shots = (o) => ((typeof IMAGES !== 'undefined' && IMAGES[o.dir]) || o.images || [])
     .filter(f => !posterNames(o).includes(f))
     .map(f => o.dir + f);
   const first = (o) => shots(o)[0] || null;
+  const cover = (o) => o.thumb ? o.dir + o.thumb : first(o);   // 갤러리 커버 (thumb 우선)
   const clip  = (o) => o.video ? o.dir + o.video : null;
   // media[] 가 있으면 이미지·영상을 그 순서대로 (각 항목 {img} 또는 {video,poster})
   const resolveMedia = (o) => o.media
@@ -737,8 +742,8 @@
   // ── render game thumbnails (twice, for a seamless loop) ──
   const track = document.getElementById('gtrack');
   const shot = (g) => el(`
-    <button class="shot ${first(g) ? 'photo' : g.cover}"
-            ${first(g) ? `style="background-image:url('${first(g)}')"` : ''}>
+    <button class="shot ${cover(g) ? 'photo' : g.cover}"
+            ${cover(g) ? `style="background-image:url('${cover(g)}')"` : ''}>
       <span class="yr">${g.badge || g.year}</span>
       <span class="cap">${g.title}</span>
     </button>`);
@@ -758,6 +763,8 @@
       const done = () => gmHero.classList.remove('loading');
       v.addEventListener('canplay', done, { once: true });
       v.addEventListener('error', done, { once: true });
+      v.play().catch(() => {});               // autoplay 속성이 안 먹는 경우 강제 재생
+      requestAnimationFrame(() => v.play().catch(() => {}));
     } else if (item) {
       gmHero.className = 'hero photo';
       gmHero.style.backgroundImage = `url('${item.src}')`;
@@ -824,7 +831,9 @@
     const b = e.target.closest('.shot'); if (!b) return;
     const g = GAMES[[...track.children].indexOf(b) % GAMES.length];
     open({ art: g.cover, title: g.title, sub: `${g.meta} · ${g.year}`, desc: g.detail,
-           shots: shots(g), link: g.link });
+           shots: shots(g), video: clip(g), poster: g.poster ? g.dir + g.poster : '',
+           clips: (g.clips || []).map(c => ({ video: g.dir + c.video, poster: g.dir + c.poster })),
+           media: resolveMedia(g), link: g.link });
   });
 
   gmStrip.addEventListener('click', e => {
