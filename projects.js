@@ -33,55 +33,46 @@ const PROJECTS = [
     ],
     title: 'Web-Based Real-Time 3D/4D Gaussian Splatting Editor',
     role: 'R&D Researcher, Computer Vision · SFACSPACE · 2026',
-    summary: 'A browser-based 3D/4D Gaussian Splatting editor with point-level editing, camera animation, and real-time shader relighting.',
+    summary: 'Contributed to a browser-based 3D/4D Gaussian Splatting editor covering scene editing, camera work, and real-time relighting.',
     detail:
       'A trained Gaussian Splatting capture is millions of unordered splats with no mesh and no ' +
       'handle to grab. This browser-based editor turns that raw output into something you can ' +
-      'work with — clean it, relight it, and film it. We built it on WebGL so a capture opens in ' +
-      'a link rather than an install, which is what lets a client review a scene the same day it ' +
-      'is shot.\n\n' +
-      'Working in a four-person team, I owned the editing, camera, and lighting stages. For ' +
-      'editing I built the selection tools — a 2D screen-space brush and 3D box/sphere volumes — ' +
-      'that let noise and stray floating splats be removed directly on the model. For camera I ' +
-      'built keyframed markers interpolated into a path, doubling as the timeline that scrubs 4D ' +
-      'playback. And I implemented shader-based real-time relighting for both 3D and 4D splats, ' +
-      'shading each splat at draw time against point lights and HDRI so a capture can be re-lit ' +
-      'live in the browser — holding 60 FPS on scenes of over a million splats.\n\n' +
-      'Relighting a splat scene is an approximation by nature: the original lighting is already ' +
-      'baked into each splat\'s colour, and splats have no true surface normal. I estimate ' +
-      'normals offline from local neighbourhoods and carry a confidence value per splat, so ' +
-      'shading can lean on geometry where it is trustworthy and fall back where it is not. It ' +
-      'reads convincingly for soft and ambient light; strong directional relighting on a harshly ' +
-      'lit capture is still beyond what this approach can do honestly.',
+      'work with — clean it, relight it, and film it. Keeping it in the browser means a capture ' +
+      'opens in a link rather than an install, which is what lets a client review a scene the ' +
+      'same day it is shot.\n\n' +
+      'Working in a small team, I took part in the editing, camera, and lighting side of the ' +
+      'tool: ways to select and clean up parts of a scene directly on the model, camera paths ' +
+      'that double as the timeline for 4D playback, and real-time relighting so a capture can be ' +
+      'lit differently while you view it.\n\n' +
+      'Relighting a splat scene is an approximation by nature — the original lighting is already ' +
+      'baked into the capture, and splats carry no true surface geometry — so the work was as ' +
+      'much about deciding how far to trust that approximation as about making it run. It reads ' +
+      'convincingly for soft and ambient light; strong directional relighting on a harshly lit ' +
+      'capture is still beyond what this approach can do honestly.',
     tags: ['Gaussian Splatting', 'Real-Time Rendering', 'Shading', 'Relighting', 'WebGL'],
   },
   {
     art: 'art-lidar',
     dir: 'img/projects/lidar-fusion/',
-    video: 'fusion-3dgs.mp4',          // COLMAP: 917 frames · 4.6M points
+    video: 'fusion-3dgs.mp4',
     poster: 'fusion-3dgs-poster.jpg',
-    title: 'LiDAR–360° Camera Fusion Pipeline for 3DGS',
+    title: 'LiDAR–360° Camera Fusion Pipeline for 3D Reconstruction',
     role: 'R&D Researcher, Computer Vision · SFACSPACE · 2026',
-    summary: 'End-to-end pipeline fusing LiDAR and a 360° camera into 3DGS / SLAM inputs, with custom calibration and time-synchronization tools.',
+    summary: 'Worked on a sensor-fusion pipeline combining LiDAR and 360° camera capture into calibrated, time-aligned input for SLAM and Gaussian Splatting.',
     detail:
       'Photorealistic reconstruction needs accurate geometry and dense colour, and no single ' +
-      'sensor gives both. Pairing a Livox MID-360 LiDAR with an Insta360 X5, I built the ' +
-      'pipeline that fuses their two independent recordings into one calibrated, time-aligned ' +
-      'dataset for SLAM and Gaussian Splatting. I was the sole engineer on the pipeline, working ' +
-      'alongside the team member who ran the capture rig.\n\n' +
-      'I built the image path and the calibration behind it. A 360° camera records one warped ' +
-      'spherical image, which no standard reconstruction tool can use directly, so each frame is ' +
-      'unwrapped into six flat perspective views — cube faces — and every face is treated as its ' +
-      'own ordinary pinhole camera. I recovered each face\'s intrinsics from checkerboards and ' +
-      'validated them against the values a cube projection should mathematically produce, ' +
-      'landing at 0.99 px reprojection error, then solved the LiDAR-to-camera extrinsics against ' +
-      'the 3.7-million-point cloud.\n\n' +
-      'The two devices also keep separate clocks and cannot be hardware-triggered together, so I ' +
-      'designed a shake-based sync method: a deliberate shake at the start of every take leaves ' +
-      'a signature in both the IMU trace and the video, and matching the two fixes the offset so ' +
-      'every frame pairs with its nearest LiDAR scan. I packaged the whole thing as a ' +
-      'containerised tool that merges the two recordings and outputs rectified images, camera ' +
-      'poses, and a registered point cloud — exactly what the downstream stages ingest.',
+      'sensor gives both. I took part in an R&D effort to combine a LiDAR unit and a 360° camera ' +
+      'into one calibrated, time-aligned dataset that downstream SLAM and Gaussian Splatting ' +
+      'stages could consume directly, contributing to the imaging and calibration side of the ' +
+      'pipeline while a teammate handled capture.\n\n' +
+      'A 360° camera records a single warped spherical image that standard reconstruction tools ' +
+      'cannot use directly, so my work covered converting that into conventional perspective ' +
+      'views and recovering the camera model behind them, then resolving the geometric ' +
+      'relationship between the camera and the LiDAR frame.\n\n' +
+      'The two devices also run on independent clocks and cannot be triggered together, so part ' +
+      'of the work was establishing a practical way to align their timelines after the fact, so ' +
+      'that imagery and range data could be paired reliably. The result was packaged as an ' +
+      'internal tool that turns a pair of raw recordings into reconstruction-ready inputs.',
     tags: ['Sensor Fusion', 'Calibration', 'Time Sync', 'SLAM', '3D Reconstruction'],
   },
   {
