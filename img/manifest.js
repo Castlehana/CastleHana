@@ -7,7 +7,6 @@ const IMAGES = {
     "point-selection-poster.jpg"
   ],
   "img/projects/lidar-fusion/": [
-    "01-pipeline.jpg",
     "2-extrinsic-calib.jpg",
     "3-extrinsic-overlay.jpg",
     "fusion-3dgs-poster.jpg"
